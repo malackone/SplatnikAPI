@@ -1,18 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using Splatnik.Data.Database;
+using Splatnik.API.Installers;
 
 namespace Splatnik.API
 {
@@ -33,21 +24,7 @@ namespace Splatnik.API
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllers();
-
-			services.AddSwaggerGen(s => 
-			{
-				s.SwaggerDoc("v1", new OpenApiInfo 
-				{ 
-					Version="v1", 
-					Title = "Splatnik API",
-					Description = "API dla projektu splatnik"
-				});
-			});
-
-			services.AddDbContext<DataContext>(options =>
-				options.UseSqlServer(
-					Configuration.GetConnectionString("SqlServer")));
+			services.InstallServiceInAssembly(Configuration);
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -65,9 +42,9 @@ namespace Splatnik.API
 
 			app.UseHttpsRedirection();
 
-			app.UseRouting();
+			app.UseStaticFiles();
 
-			app.UseAuthorization();
+			app.UseRouting();
 
 			app.UseEndpoints(endpoints =>
 			{
