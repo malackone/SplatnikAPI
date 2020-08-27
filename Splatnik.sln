@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splatnik.API", "Splatnik.API\Splatnik.API.csproj", "{00D9ED8D-0960-47B4-B393-ED2FB43E0023}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splatnik.Data", "Splatnik.Data\Splatnik.Data.csproj", "{5D2BADE2-878D-48E5-B7CF-E18DB2E2CA38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splatnik.Contracts", "Splatnik.Contracts\Splatnik.Contracts.csproj", "{F3E6643B-4510-434C-80C1-A4E47BB7899F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splatnik.Tests", "Splatnik.Tests\Splatnik.Tests.csproj", "{2F1B3320-11AF-480C-8213-368C7B1C8C09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00D9ED8D-0960-47B4-B393-ED2FB43E0023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00D9ED8D-0960-47B4-B393-ED2FB43E0023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00D9ED8D-0960-47B4-B393-ED2FB43E0023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00D9ED8D-0960-47B4-B393-ED2FB43E0023}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D2BADE2-878D-48E5-B7CF-E18DB2E2CA38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D2BADE2-878D-48E5-B7CF-E18DB2E2CA38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D2BADE2-878D-48E5-B7CF-E18DB2E2CA38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D2BADE2-878D-48E5-B7CF-E18DB2E2CA38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3E6643B-4510-434C-80C1-A4E47BB7899F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3E6643B-4510-434C-80C1-A4E47BB7899F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3E6643B-4510-434C-80C1-A4E47BB7899F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3E6643B-4510-434C-80C1-A4E47BB7899F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F1B3320-11AF-480C-8213-368C7B1C8C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F1B3320-11AF-480C-8213-368C7B1C8C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F1B3320-11AF-480C-8213-368C7B1C8C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F1B3320-11AF-480C-8213-368C7B1C8C09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC67C2D3-5F7E-4A26-92BE-71E4A466F6E3}
+	EndGlobalSection
+EndGlobal
