@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Database\Migrations\20200827212926_BasicApplicationModel.cs" />
+    <Compile Remove="Database\Migrations\20200827212926_BasicApplicationModel.Designer.cs" />
+    <Compile Remove="Database\Migrations\20200827213221_ModelUpdate.cs" />
+    <Compile Remove="Database\Migrations\20200827213221_ModelUpdate.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Splatnik.Contracts\Splatnik.Contracts.csproj" />
   </ItemGroup>
 

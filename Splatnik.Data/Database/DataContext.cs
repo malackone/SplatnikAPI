@@ -11,5 +11,9 @@ namespace Splatnik.Data.Database
 		}
 
 		public DbSet<RefreshToken> RefreshTokens { get; set; }
+		public DbSet<Budget> Budgets { get; set; }
+		public DbSet<Period> Periods { get; set; }
+		public DbSet<Income> Incomes { get; set; }
+		public DbSet<Expense> Expenses { get; set; }
 	}
 }
