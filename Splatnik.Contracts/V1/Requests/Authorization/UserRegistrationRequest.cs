@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Splatnik.Contracts.V1.Requests
+namespace Splatnik.Contracts.V1.Requests.Authorization
 {
 	public class UserRegistrationRequest
 	{

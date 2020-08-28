@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Splatnik.API.Filters;
 using Splatnik.API.Services;
 using Splatnik.API.Services.Interfaces;
 using Splatnik.API.Settings;
@@ -24,6 +28,18 @@ namespace Splatnik.API.Installers
 
 			services.AddScoped<IIdentityService, IdentityService>();
 			services.AddScoped<IIdentityRepository, IdentityRepository>();
+			services.AddScoped<IBudgetService, BudgetService>();
+			services.AddScoped<IBudgetRepository, BudgetRepository>();
+
+
+			services
+				.AddMvc(options =>
+				{
+					options.EnableEndpointRouting = false;
+					options.Filters.Add<ValidationFilter>();
+				})
+				.AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<Startup>())
+				.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 			var tokenValidationParameters = new TokenValidationParameters
 			{
@@ -52,6 +68,13 @@ namespace Splatnik.API.Installers
 			});
 
 
+			services.AddSingleton<IUriService>(prov =>
+			{
+				var accessor = prov.GetRequiredService<IHttpContextAccessor>();
+				var request = accessor.HttpContext.Request;
+				var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent(), "/");
+				return new UriService(absoluteUri);
+			});
 
 		}
 	}

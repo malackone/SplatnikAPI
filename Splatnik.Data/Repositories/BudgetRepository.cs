@@ -1,8 +1,10 @@
-﻿using Splatnik.Data.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using Splatnik.Data.Database;
 using Splatnik.Data.Database.DbModels;
 using Splatnik.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,16 +19,8 @@ namespace Splatnik.Data.Repositories
 			_dataContext = dataContext;
 		}
 
-		public async Task<Budget> CreateBudgetAsync()
+		public async Task<Budget> CreateBudgetAsync(Budget budget)
 		{
-			var budget = new Budget
-			{
-				CreatedAt = DateTime.UtcNow,
-				UpdatedAt = DateTime.UtcNow,
-				Name = "Test",
-				Description = "Test description",
-				UserId = "312160ef-44f3-42f3-8b7b-9dc8f9bd161e",
-			};
 
 			_dataContext.Budgets.Add(budget);
 			await _dataContext.SaveChangesAsync();
@@ -34,9 +28,14 @@ namespace Splatnik.Data.Repositories
 			return budget;
 		}
 
-		public Task<Budget> GetBudgetAsync(int budgetId)
+		public async Task<Budget> GetBudgetAsync(int budgetId)
 		{
-			throw new NotImplementedException();
+			return await _dataContext.Budgets
+				.Include(x => x.Periods)
+				.ThenInclude(x=>x.Incomes)
+				.Include(x => x.Periods)
+				.ThenInclude(x => x.Expenses)
+				.FirstOrDefaultAsync(x => x.Id == budgetId);
 		}
 
 		public Task<IList<Budget>> GetUserBudgets(string userId)

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,7 @@ namespace Splatnik.API
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.InstallServiceInAssembly(Configuration);
+			services.AddAutoMapper(typeof(Startup));
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Splatnik.API.Services.Interfaces;
 using Splatnik.Contracts.V1;
-using Splatnik.Contracts.V1.Requests;
-using Splatnik.Contracts.V1.Responses;
+using Splatnik.Contracts.V1.Requests.Authorization;
+using Splatnik.Contracts.V1.Responses.Authorization;
 
 namespace Splatnik.API.Controllers.V1
 {

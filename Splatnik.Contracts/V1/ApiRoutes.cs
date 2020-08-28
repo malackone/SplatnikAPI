@@ -16,5 +16,11 @@ namespace Splatnik.Contracts.V1
 			public const string Register = Base + "/identity/register";
 			public const string Refresh = Base + "/identity/refresh";
 		}
+
+		public static class Budget
+		{
+			public const string Create = Base + "/budget";
+			public const string Get = Base + "/budget/{budgetId}";
+		}
 	}
 }
