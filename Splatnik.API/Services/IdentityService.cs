@@ -62,7 +62,6 @@ namespace Splatnik.API.Services
 			return await GenerateAuthenticationResultForUserAsync(newUser);
 		}
 
-
 		public async Task<AuthenticationResult> LoginAsync(string email, string password)
 		{
 			var user = await _identityRepository.FindByEmailAsync(email);
@@ -158,6 +157,29 @@ namespace Splatnik.API.Services
 			return await GenerateAuthenticationResultForUserAsync(user);
 
 		}
+
+		public async Task<IdentityResult> CreateRoleAsync(string name)
+		{
+			var role = new IdentityRole
+			{
+				Name = name,
+				Id = Guid.NewGuid().ToString(),
+				NormalizedName = name.ToUpper()
+			};
+
+			return await _identityRepository.CreateRoleAsync(role);
+		}
+
+		public async Task<IdentityResult> AssignUserToRole(string username, string roleName)
+		{
+			var user = await _identityRepository.FindByEmailAsync(username);
+			var role = await _identityRepository.FindByNameAsync(roleName);
+
+			return await _identityRepository.AssingRoleToUserAsync(user, role);
+
+		}
+
+
 
 		private ClaimsPrincipal GetPrincipalFromToken(string token)
 		{

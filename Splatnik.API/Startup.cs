@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Splatnik.API.Installers;
+using Splatnik.API.Settings;
 
 namespace Splatnik.API
 {
@@ -36,17 +37,26 @@ namespace Splatnik.API
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseSwagger();
+
+			var swaggerOptions = new SwaggerSettings();
+			Configuration.GetSection(nameof(SwaggerSettings)).Bind(swaggerOptions);
+
+			app.UseSwagger(option => { option.RouteTemplate = swaggerOptions.JsonRoute; });
 			app.UseSwaggerUI(c =>
 			{
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Splatnik API v1");
+				c.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
 			});
+
 
 			app.UseHttpsRedirection();
 
 			app.UseStaticFiles();
 
+
 			app.UseRouting();
+
+			app.UseAuthentication();
+			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 			{

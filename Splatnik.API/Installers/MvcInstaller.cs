@@ -41,6 +41,7 @@ namespace Splatnik.API.Installers
 				.AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<Startup>())
 				.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
+
 			var tokenValidationParameters = new TokenValidationParameters
 			{
 				ValidateIssuerSigningKey = true,
@@ -67,6 +68,12 @@ namespace Splatnik.API.Installers
 				x.TokenValidationParameters = tokenValidationParameters;
 			});
 
+
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy("Admin", policy =>{ policy.RequireRole("Admin"); });
+				options.AddPolicy("User", policy =>{ policy.RequireRole("User"); });
+			});
 
 			services.AddSingleton<IUriService>(prov =>
 			{

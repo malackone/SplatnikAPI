@@ -1,4 +1,5 @@
-﻿using Splatnik.Data.Domain;
+﻿using Microsoft.AspNetCore.Identity;
+using Splatnik.Data.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace Splatnik.API.Services.Interfaces
         Task<AuthenticationResult> RegisterAsync(string email, string password);
         Task<AuthenticationResult> LoginAsync(string email, string password);
         Task<AuthenticationResult> RefreshTokenAsync(string token, string refreshToken);
+        Task<IdentityResult> CreateRoleAsync(string roleName);
+        Task<IdentityResult> AssignUserToRole(string username, string roleName);
     }
 }

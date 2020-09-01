@@ -81,5 +81,16 @@ namespace Splatnik.Data.Repositories
 		{
 			return await _userManager.FindByIdAsync(validatedToken.Claims.Single(x => x.Type == "id").Value);
 		}
+
+		public async Task<IdentityResult> CreateRoleAsync(IdentityRole role)
+		{
+
+			return await _roleManager.CreateAsync(role);
+		}
+
+		public async Task<IdentityResult> AssingRoleToUserAsync(IdentityUser user, IdentityRole role) 
+		{
+			return await _userManager.AddToRoleAsync(user, role.Name);
+		}
 	}
 }

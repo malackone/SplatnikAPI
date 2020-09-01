@@ -15,6 +15,9 @@ namespace Splatnik.Contracts.V1
 			public const string Login = Base + "/identity/login";
 			public const string Register = Base + "/identity/register";
 			public const string Refresh = Base + "/identity/refresh";
+			public const string CreateRole = Base + "/identity/createRole";
+			public const string AssignRoleToUser = Base + "/identity/assignRole";
+
 		}
 
 		public static class Budget

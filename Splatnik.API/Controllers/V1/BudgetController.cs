@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Splatnik.API.Services.Interfaces;
 using Splatnik.Contracts.V1;
@@ -11,6 +13,7 @@ using Splatnik.Contracts.V1.Responses;
 
 namespace Splatnik.API.Controllers.V1
 {
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class BudgetController : Controller
 	{
 		private readonly IBudgetService _budgetService;
@@ -28,6 +31,11 @@ namespace Splatnik.API.Controllers.V1
 		public async Task<IActionResult> Create([FromBody] CreateBudgetRequest request)
 		{
 			var budget = await _budgetService.CreateBudgetAsync(request);
+
+			if(budget == null)
+			{
+				return BadRequest();
+			}
 
 			var locationUri = _uriService.GetBudgetUri(budget.ToString());
 

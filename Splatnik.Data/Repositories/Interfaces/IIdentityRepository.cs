@@ -22,5 +22,7 @@ namespace Splatnik.Data.Repositories.Interfaces
 		Task<RefreshToken> GetRefreshTokenAsync(string refreshToken);
 		Task RefreshTokenUpdateAsync(RefreshToken storedRefreshToken);
 		Task<IdentityUser> FindByIdAsync(ClaimsPrincipal validatedToken);
+		Task<IdentityResult> CreateRoleAsync(IdentityRole role);
+		Task<IdentityResult> AssingRoleToUserAsync(IdentityUser user, IdentityRole role);
 	}
 }
