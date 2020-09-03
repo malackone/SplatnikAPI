@@ -92,5 +92,15 @@ namespace Splatnik.Data.Repositories
 		{
 			return await _userManager.AddToRoleAsync(user, role.Name);
 		}
+
+		public async Task<IdentityResult> ConfirmEmail(IdentityUser user, string token)
+		{
+			return await _userManager.ConfirmEmailAsync(user, token);
+		}
+
+		public async Task<string> GenerateEmailConfirmationToken(IdentityUser user)
+		{
+			return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+		}
 	}
 }

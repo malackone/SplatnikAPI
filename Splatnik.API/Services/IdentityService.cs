@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal.Account;
 using Microsoft.IdentityModel.Tokens;
 using Splatnik.API.Services.Interfaces;
 using Splatnik.API.Settings;
@@ -21,12 +21,14 @@ namespace Splatnik.API.Services
 		private readonly JwtSettings _jwtSettings;
 		private readonly TokenValidationParameters _tokenValidationParameters;
 		private readonly IIdentityRepository _identityRepository;
+		private readonly IEmailService _emailService;
 
-		public IdentityService(JwtSettings jwtSettings, TokenValidationParameters tokenValidationParameters, IIdentityRepository identityRepository)
+		public IdentityService(JwtSettings jwtSettings, TokenValidationParameters tokenValidationParameters, IIdentityRepository identityRepository, IEmailService emailService)
 		{
 			_jwtSettings = jwtSettings;
 			_tokenValidationParameters = tokenValidationParameters;
 			_identityRepository = identityRepository;
+			_emailService = emailService;
 		}
 
 
@@ -50,7 +52,7 @@ namespace Splatnik.API.Services
 			};
 
 			var createdUser = await _identityRepository.CreateAsync(newUser, password);
-
+			
 			if (!createdUser.Succeeded)
 			{
 				return new AuthenticationResult
@@ -58,6 +60,19 @@ namespace Splatnik.API.Services
 					Errors = createdUser.Errors.Select(x => x.Description)
 				};
 			}
+
+			// Assign default role "User" to new registered user
+			var userInDb = await _identityRepository.FindByEmailAsync(email);
+			var defaultUserRoleToAssign = await _identityRepository.FindByNameAsync("User");
+			await _identityRepository.AssingRoleToUserAsync(userInDb, defaultUserRoleToAssign);
+
+
+			// generate confirmation token and send email
+			var token = await _identityRepository.GenerateEmailConfirmationToken(userInDb);
+
+			var confirmEmailResponse = await _emailService.SendEmailAsync(userInDb.Email, token);
+
+			var response = confirmEmailResponse.Body.ReadAsStringAsync();
 
 			return await GenerateAuthenticationResultForUserAsync(newUser);
 		}
@@ -158,28 +173,13 @@ namespace Splatnik.API.Services
 
 		}
 
-		public async Task<IdentityResult> CreateRoleAsync(string name)
-		{
-			var role = new IdentityRole
-			{
-				Name = name,
-				Id = Guid.NewGuid().ToString(),
-				NormalizedName = name.ToUpper()
-			};
 
-			return await _identityRepository.CreateRoleAsync(role);
-		}
-
-		public async Task<IdentityResult> AssignUserToRole(string username, string roleName)
+		public async Task<IdentityResult> ConfirmEmail(string username, string token)
 		{
 			var user = await _identityRepository.FindByEmailAsync(username);
-			var role = await _identityRepository.FindByNameAsync(roleName);
 
-			return await _identityRepository.AssingRoleToUserAsync(user, role);
-
+			return await _identityRepository.ConfirmEmail(user, token);
 		}
-
-
 
 		private ClaimsPrincipal GetPrincipalFromToken(string token)
 		{
@@ -247,7 +247,6 @@ namespace Splatnik.API.Services
 				}
 			}
 
-
 			var tokenDescriptor = new SecurityTokenDescriptor
 			{
 				Subject = new ClaimsIdentity(claims),
@@ -276,5 +275,34 @@ namespace Splatnik.API.Services
 
 
 		}
+		
+		
+		/*
+		private SecurityToken GenerateEmailConfirmationJwtToken(IdentityUser user, string identityToken)
+		{
+			var tokenHandler = new JwtSecurityTokenHandler();
+			var key = Encoding.ASCII.GetBytes(_jwtSettings.Secret);
+
+			var claims = new List<Claim>
+			{
+				new Claim(JwtRegisteredClaimNames.Email, user.Email),
+				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+				new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+				new Claim("id", user.Id),
+				new Claim("identityToken",identityToken)
+			};
+
+			var tokenDescriptor = new SecurityTokenDescriptor
+			{
+				Subject = new ClaimsIdentity(claims),
+				Expires = DateTime.UtcNow.Add(_jwtSettings.TokenLifetime),
+				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+			};
+
+			return tokenHandler.CreateToken(tokenDescriptor);
+
+		}
+
+		*/
 	}
 }

@@ -24,5 +24,7 @@ namespace Splatnik.Data.Repositories.Interfaces
 		Task<IdentityUser> FindByIdAsync(ClaimsPrincipal validatedToken);
 		Task<IdentityResult> CreateRoleAsync(IdentityRole role);
 		Task<IdentityResult> AssingRoleToUserAsync(IdentityUser user, IdentityRole role);
+		Task<IdentityResult> ConfirmEmail(IdentityUser user, string token);
+		Task<string> GenerateEmailConfirmationToken(IdentityUser user);
 	}
 }

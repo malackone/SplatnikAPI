@@ -15,10 +15,17 @@ namespace Splatnik.Contracts.V1
 			public const string Login = Base + "/identity/login";
 			public const string Register = Base + "/identity/register";
 			public const string Refresh = Base + "/identity/refresh";
-			public const string CreateRole = Base + "/identity/createRole";
-			public const string AssignRoleToUser = Base + "/identity/assignRole";
-
+			//public const string ConfirmEmail = Base + "/identity/confirmEmail?token={jwtToken}&email={email}";
+			public const string ConfirmEmail = Base + "/identity/confirmEmail";
 		}
+
+		public static class Admin
+		{
+			public const string CreateRole = Base + "/admin/createRole";
+			public const string AssignRoleToUser = Base + "/admin/assignRole";
+			public const string Email = Base + "/admin/email";
+		}
+
 
 		public static class Budget
 		{

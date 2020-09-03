@@ -20,5 +20,10 @@ namespace Splatnik.API.Services
 		{
 			return new Uri(_baseUri + ApiRoutes.Budget.Get.Replace("{budgetId}", budgetId));
 		}
+
+		public Uri GetConfirmationLink(string email, string token)
+		{
+			return new Uri(_baseUri + ApiRoutes.Identity.ConfirmEmail + "/" + email + "/" + token);
+		}
 	}
 }

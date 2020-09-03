@@ -5,6 +5,7 @@ using Splatnik.API.Services.Interfaces;
 using Splatnik.Contracts.V1;
 using Splatnik.Contracts.V1.Requests.Authorization;
 using Splatnik.Contracts.V1.Responses.Authorization;
+using Splatnik.Contracts.V1.Responses.IdentityManagement;
 
 namespace Splatnik.API.Controllers.V1
 {
@@ -91,6 +92,25 @@ namespace Splatnik.API.Controllers.V1
 		}
 
 
+		[HttpPost(ApiRoutes.Identity.ConfirmEmail)]
+		public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailRequest request)
+		{
+
+			var confirmation = await _identityService.ConfirmEmail(request.Email, request.Token);
+
+			if (!confirmation.Succeeded)
+			{
+				return BadRequest(new IdentityFailedResponse
+				{
+					Errors = confirmation.Errors
+				});
+			}
+
+			return Ok(new IdentitySuccessResponse
+			{
+				Message = "Email Confirmed"
+			});
+		}
 
 	}
 }

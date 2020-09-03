@@ -13,7 +13,7 @@ using Splatnik.Contracts.V1.Responses;
 
 namespace Splatnik.API.Controllers.V1
 {
-	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+	[Authorize(Policy = "User", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class BudgetController : Controller
 	{
 		private readonly IBudgetService _budgetService;

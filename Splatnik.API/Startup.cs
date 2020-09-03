@@ -48,6 +48,8 @@ namespace Splatnik.API
 			});
 
 
+
+
 			app.UseHttpsRedirection();
 
 			app.UseStaticFiles();

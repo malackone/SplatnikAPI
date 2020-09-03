@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Services.Interfaces
 {
-	public interface IUriService
+	public interface ISplatnikEmailSender
 	{
-		Uri GetBudgetUri(string budgetId);
-		Uri GetConfirmationLink(string email, string token);
+		Task SendConfirmationEmail(string email, string token);
 	}
 }

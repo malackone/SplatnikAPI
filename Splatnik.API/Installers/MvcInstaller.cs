@@ -22,15 +22,21 @@ namespace Splatnik.API.Installers
 		{
 			var jwtSettings = new JwtSettings();
 			configuration.Bind(nameof(jwtSettings), jwtSettings);
+
+			var sendGridSettings = new SendGridSettings();
+			configuration.Bind(nameof(sendGridSettings), sendGridSettings);
+
 			services.AddSingleton(jwtSettings);
+			services.AddSingleton(sendGridSettings);
 
-			services.AddControllers();
-
+			services.AddScoped<IAdminService, AdminService>();
 			services.AddScoped<IIdentityService, IdentityService>();
 			services.AddScoped<IIdentityRepository, IdentityRepository>();
 			services.AddScoped<IBudgetService, BudgetService>();
 			services.AddScoped<IBudgetRepository, BudgetRepository>();
+			services.AddScoped<IEmailService, EmailSender>();
 
+			services.AddControllers();
 
 			services
 				.AddMvc(options =>
@@ -52,10 +58,6 @@ namespace Splatnik.API.Installers
 				ValidateLifetime = true
 			};
 
-
-			services.AddSingleton(tokenValidationParameters);
-
-
 			services.AddAuthentication(x =>
 			{
 				x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -68,10 +70,15 @@ namespace Splatnik.API.Installers
 				x.TokenValidationParameters = tokenValidationParameters;
 			});
 
+			services.AddSingleton(tokenValidationParameters);
+
+
+
 
 			services.AddAuthorization(options =>
 			{
-				options.AddPolicy("Admin", policy =>{ policy.RequireRole("Admin"); });
+				options.AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
+
 				options.AddPolicy("User", policy =>{ policy.RequireRole("User"); });
 			});
 
@@ -82,6 +89,9 @@ namespace Splatnik.API.Installers
 				var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent(), "/");
 				return new UriService(absoluteUri);
 			});
+
+
+
 
 		}
 	}

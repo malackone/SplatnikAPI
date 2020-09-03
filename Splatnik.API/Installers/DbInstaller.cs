@@ -13,9 +13,12 @@ namespace Splatnik.API.Installers
 			services.AddDbContext<DataContext>(options =>
 				options.UseSqlServer(configuration.GetConnectionString("SqlServer")));
 
-			services.AddDefaultIdentity<IdentityUser>()
-				.AddRoles<IdentityRole>()
-				.AddEntityFrameworkStores<DataContext>();
+			services.AddDefaultIdentity<IdentityUser>(options =>
+			{
+				options.SignIn.RequireConfirmedEmail = true;
+			})
+			.AddRoles<IdentityRole>()
+			.AddEntityFrameworkStores<DataContext>();
 		}
 	}
 }
