@@ -4,13 +4,12 @@ using System.Text;
 
 namespace Splatnik.Contracts.V1.Requests
 {
-	public class CreateBudgetRequest
+	public class NewBudgetRequest
 	{
 
 		public string Name { get; set; }
 
 		public string Description { get; set; }
 
-		public string UserId { get; set; }
 	}
 }

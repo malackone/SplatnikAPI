@@ -25,7 +25,8 @@ namespace Splatnik.API.Services
 		{
 			var subject = "Splatnik | Confirm your email addres";
 			var confirmationLink = _uriService.GetConfirmationLink(email, token);
-			var message = confirmationLink.AbsoluteUri;
+			//var message = confirmationLink.AbsoluteUri;
+			var message = token;
 			return Execute(_sendGridSettings.SendGridKey, subject, message, email);
 		}
 

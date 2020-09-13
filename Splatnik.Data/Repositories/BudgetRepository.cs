@@ -38,9 +38,10 @@ namespace Splatnik.Data.Repositories
 				.FirstOrDefaultAsync(x => x.Id == budgetId);
 		}
 
-		public Task<IList<Budget>> GetUserBudgets(string userId)
+		public async Task<IList<Budget>> GetUserBudgets(string userId)
 		{
-			throw new NotImplementedException();
+			return await _dataContext.Budgets.Where(x => x.UserId == userId).ToListAsync();
 		}
-	}
+
+    }
 }

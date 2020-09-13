@@ -23,7 +23,7 @@ namespace Splatnik.API.Services
 
 		}
 
-		public async Task<Budget> CreateBudgetAsync(CreateBudgetRequest budgetRequest)
+		public async Task<Budget> CreateBudgetAsync(NewBudgetRequest budgetRequest, string userId)
 		{
 
 			var budgetDto = new BudgetDto
@@ -32,7 +32,7 @@ namespace Splatnik.API.Services
 				UpdatedAt = DateTime.UtcNow,
 				Name = budgetRequest.Name,
 				Description = budgetRequest.Description,
-				UserId = budgetRequest.UserId,
+				UserId = userId,
 			};
 
 			var budget = _mapper.Map<Budget>(budgetDto);
@@ -46,5 +46,11 @@ namespace Splatnik.API.Services
 		{
 			return await _budgetRepository.GetBudgetAsync(budgetId);
 		}
-	}
+
+
+		public async Task<IList<Budget>> GetUserBudgets(string userId) 
+		{
+			return await _budgetRepository.GetUserBudgets(userId);
+		}
+    }
 }

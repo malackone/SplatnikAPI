@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Validation
 {
-	public class CreateBudgetRequestValidator : AbstractValidator<CreateBudgetRequest>
+	public class CreateBudgetRequestValidator : AbstractValidator<NewBudgetRequest>
 	{
 		public CreateBudgetRequestValidator()
 		{
@@ -19,11 +19,6 @@ namespace Splatnik.API.Validation
 
 			RuleFor(x => x.Description)
 				.MaximumLength(200);
-
-			RuleFor(x => x.UserId)
-				.NotEmpty()
-				.NotNull()
-				.MaximumLength(450);
 		}
 	}
 }

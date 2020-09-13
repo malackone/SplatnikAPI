@@ -14,7 +14,7 @@ using Splatnik.Contracts.V1.Responses.IdentityManagement;
 
 namespace Splatnik.API.Controllers.V1
 {
-	[Authorize(Policy = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+	//[Authorize(Policy = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class AdminController : Controller
 	{
 		private readonly IAdminService _adminService;
@@ -27,7 +27,7 @@ namespace Splatnik.API.Controllers.V1
 		}
 
 
-		[HttpPost(ApiRoutes.Admin.CreateRole)]
+		[HttpPost(ApiRoutes.Admin.Role)]
 		public async Task<IActionResult> CreateRole([FromBody] CreateRoleRequest request)
 		{
 			var roleResponse = await _adminService.CreateRoleAsync(request.Name);
@@ -47,7 +47,7 @@ namespace Splatnik.API.Controllers.V1
 		}
 
 
-		[HttpPost(ApiRoutes.Admin.AssignRoleToUser)]
+		[HttpPost(ApiRoutes.Admin.UserRoles)]
 		public async Task<IActionResult> AssignRoleToUser([FromBody] AssignRoleToUserRequest request)
 		{
 			var response = await _adminService.AssignUserToRole(request.Username, request.RoleName);
@@ -68,7 +68,7 @@ namespace Splatnik.API.Controllers.V1
 
 
 		[AllowAnonymous]
-		[HttpGet(ApiRoutes.Admin.Email)]
+		[HttpGet(ApiRoutes.Admin.TestEmail)]
 		public async Task<IActionResult> SendEmail()
 		{
 			var sendGridSettings = new SendGridSettings();

@@ -16,21 +16,22 @@ namespace Splatnik.Contracts.V1
 			public const string Register = Base + "/identity/register";
 			public const string Refresh = Base + "/identity/refresh";
 			//public const string ConfirmEmail = Base + "/identity/confirmEmail?token={jwtToken}&email={email}";
-			public const string ConfirmEmail = Base + "/identity/confirmEmail";
+			public const string ConfirmEmail = Base + "/identity/emailConfirmation";
 		}
 
 		public static class Admin
 		{
-			public const string CreateRole = Base + "/admin/createRole";
-			public const string AssignRoleToUser = Base + "/admin/assignRole";
-			public const string Email = Base + "/admin/email";
+			public const string Role = Base + "/admin/role";
+			public const string UserRoles = Base + "/admin/userRoles";
+			public const string TestEmail = Base + "/admin/testEmail";
 		}
 
 
-		public static class Budget
+		public static class User
 		{
-			public const string Create = Base + "/budget";
-			public const string Get = Base + "/budget/{budgetId}";
+			public const string NewBudget = Base + "/user/budgets";
+			public const string UserBudget = Base + "/user/budgets/{budgetId}";
+			public const string UserBudgets = Base + "/user/budgets";
 		}
 	}
 }

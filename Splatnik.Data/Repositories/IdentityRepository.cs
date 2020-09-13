@@ -102,5 +102,10 @@ namespace Splatnik.Data.Repositories
 		{
 			return await _userManager.GenerateEmailConfirmationTokenAsync(user);
 		}
+		
+		public async Task<IdentityUser> FindUserByIdAsync(string userId)
+        {
+			return await _userManager.FindByIdAsync(userId);
+        }
 	}
 }
