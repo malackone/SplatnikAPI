@@ -29,8 +29,10 @@ namespace Splatnik.API.Controllers.V1
 			_uriService = uriService;
 		}
 
-		[HttpPost(ApiRoutes.User.NewBudget)]
-		public async Task<IActionResult> Create([FromBody] NewBudgetRequest request)
+
+        #region Budgets
+        [HttpPost(ApiRoutes.User.NewBudget)]
+		public async Task<IActionResult> NewBudget([FromBody] NewBudgetRequest request)
 		{
 
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
@@ -48,7 +50,7 @@ namespace Splatnik.API.Controllers.V1
 				return BadRequest();
 			}
 
-			var locationUri = _uriService.GetBudgetUri(budget.ToString());
+			var locationUri = _uriService.GetBudgetUri(budget.Id.ToString());
 
 			return Created(locationUri, new Response<BudgetResponse>(_mapper.Map<BudgetResponse>(budget)));
 
@@ -78,7 +80,7 @@ namespace Splatnik.API.Controllers.V1
 
 
 		[HttpGet(ApiRoutes.User.UserBudgets)]
-		public async Task<IActionResult> GetUserBudgets()
+		public async Task<IActionResult> UserBudgets()
 		{
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
 
@@ -92,5 +94,61 @@ namespace Splatnik.API.Controllers.V1
 
 			return Ok(new Response<IEnumerable<BudgetResponse>>(_mapper.Map<IEnumerable<BudgetResponse>>(budgets)));
 		}
-	}
+        #endregion
+
+        #region Periods
+		[HttpPost(ApiRoutes.User.NewPeriod)]
+		public async Task<IActionResult> NewPeriod([FromBody] NewPeriodRequest request)
+        {
+
+			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
+
+			// check if user exists
+			var user = await _identityService.CheckIfUserExists(userId);
+			if (!user)
+			{
+				return NotFound();
+			}
+
+			// check if new period budgetId is correct
+			var budget = await _budgetService.GetBudgetAsync(request.BudgetId);
+
+			if(budget == null)
+            {
+				return NotFound();
+            }
+
+			if(budget.UserId != userId)
+            {
+				return BadRequest();
+            }
+
+
+			// Check if new period dates are between any other period dates
+			var periodList = await _budgetService.GetBudgetPeriodsAsync(request.BudgetId);
+			if (periodList.Any(x => x.FirstDay <= request.FirstDay && x.LastDay >= request.FirstDay))
+			{
+				return BadRequest(new ErrorResponse(new ErrorModel { FieldName = nameof(request.FirstDay), Message = "First day of new period cannot be between other period dates"}));
+			}
+
+			if (periodList.Any(x => x.FirstDay <= request.LastDay && x.LastDay >= request.LastDay))
+            {
+				return BadRequest(new ErrorResponse(new ErrorModel { FieldName = nameof(request.LastDay), Message = "Last day of new period cannot be between other period dates" }));
+			}
+
+			// create new period
+			var period = await _budgetService.CreatePeriodAsync(request, userId);
+
+			if(period == null)
+            {
+				return BadRequest();
+            }
+
+			var locationUri = _uriService.GetPeriodUri(period.ToString());
+
+			return Created(locationUri, new Response<PeriodResponse>(_mapper.Map<PeriodResponse>(period)));
+
+		}
+        #endregion
+    }
 }

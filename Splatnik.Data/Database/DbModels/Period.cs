@@ -8,7 +8,6 @@ namespace Splatnik.Data.Database.DbModels
 {
 	public class Period
 	{
-
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }

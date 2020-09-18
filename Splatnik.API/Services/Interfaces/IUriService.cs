@@ -8,6 +8,7 @@ namespace Splatnik.API.Services.Interfaces
 	public interface IUriService
 	{
 		Uri GetBudgetUri(string budgetId);
+		Uri GetPeriodUri(string periodId);
 		Uri GetConfirmationLink(string email, string token);
 	}
 }

@@ -7,6 +7,7 @@ using Splatnik.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Splatnik.API.Services
@@ -32,7 +33,7 @@ namespace Splatnik.API.Services
 				UpdatedAt = DateTime.UtcNow,
 				Name = budgetRequest.Name,
 				Description = budgetRequest.Description,
-				UserId = userId,
+				UserId = userId
 			};
 
 			var budget = _mapper.Map<Budget>(budgetDto);
@@ -47,10 +48,45 @@ namespace Splatnik.API.Services
 			return await _budgetRepository.GetBudgetAsync(budgetId);
 		}
 
-
 		public async Task<IList<Budget>> GetUserBudgets(string userId) 
 		{
 			return await _budgetRepository.GetUserBudgets(userId);
 		}
+
+		public async Task<Period> CreatePeriodAsync(NewPeriodRequest periodRequest, string userId)
+        {
+
+			var periodDto = new PeriodDto
+			{
+				CreatedAt = DateTime.UtcNow,
+				DisplayName = periodRequest.DisplayName,
+				FirstDay = periodRequest.FirstDay,
+				LastDay = periodRequest.LastDay,
+				Notes = periodRequest.Notes,
+				BudgetId = periodRequest.BudgetId
+			};
+
+			var period = _mapper.Map<Period>(periodDto);
+
+			var created = await _budgetRepository.CreatePeriodAsync(period);
+
+			return created;
+
+        }
+
+		public async Task<Period> GetPeriodAsync(int periodId)
+        {
+			return await _budgetRepository.GetPeriodAsync(periodId);
+        }
+
+		public async Task<Period> GetCurrentPeriodAsync(int budgetId, DateTime today)
+        {
+			return await _budgetRepository.GetCurrentPeriodAsync(budgetId, today);
+        }
+
+		public async Task<IList<Period>> GetBudgetPeriodsAsync(int budgetId)
+        {
+			return await _budgetRepository.GetBudgetPeriodsAsync(budgetId);
+        }
     }
 }

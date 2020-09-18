@@ -13,6 +13,7 @@ namespace Splatnik.API.AutoMapper
 		public DtoToDatabaseProfile()
 		{
 			CreateMap<BudgetDto, Budget>();
+			CreateMap<PeriodDto, Period>();
 		}
 	}
 }
