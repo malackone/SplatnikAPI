@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Validation
 {
-	public class CreateBudgetRequestValidator : AbstractValidator<NewBudgetRequest>
+	public class NewBudgetRequestValidator : AbstractValidator<NewBudgetRequest>
 	{
-		public CreateBudgetRequestValidator()
+		public NewBudgetRequestValidator()
 		{
 			RuleFor(x => x.Name)
 				.NotEmpty()

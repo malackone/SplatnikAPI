@@ -52,9 +52,9 @@ namespace Splatnik.Data.Repositories
 			return period;
         }
 
-		public async Task<Period> GetPeriodAsync(int periodId) 
+		public async Task<Period> GetPeriodAsync(int budgetId, int periodId) 
 		{
-			return await _dataContext.Periods.FirstOrDefaultAsync(x => x.Id == periodId);
+			return await _dataContext.Periods.FirstOrDefaultAsync(x => x.Id == periodId && x.BudgetId == budgetId);
 		}
 
 		public async Task<IList<Period>> GetBudgetPeriodsAsync(int budgetId)
@@ -65,6 +65,32 @@ namespace Splatnik.Data.Repositories
         public async Task<Period> GetCurrentPeriodAsync(int budgetId, DateTime today)
         {
 			return await _dataContext.Periods.FirstOrDefaultAsync(x => x.BudgetId == budgetId && x.FirstDay >= today && x.LastDay <= today);
+        }
+
+        public async Task<Expense> CreateExpenseAsync(Expense expense)
+        {
+			_dataContext.Expenses.Add(expense);
+			await _dataContext.SaveChangesAsync();
+
+			return expense;
+        }
+
+        public async Task<Expense> GetExpenseAsync(int periodId, int expenseId)
+        {
+			return await _dataContext.Expenses.FirstOrDefaultAsync(x => x.Id == expenseId && x.PeriodId == periodId);
+        }
+
+        public async Task<Income> CreateIncomeAsync(Income income)
+        {
+			_dataContext.Incomes.Add(income);
+			await _dataContext.SaveChangesAsync();
+
+			return income;
+        }
+
+        public async Task<Income> GetIncomeAsync(int periodId, int incomeId)
+        {
+			return await _dataContext.Incomes.FirstOrDefaultAsync(x => x.Id == incomeId && x.PeriodId == periodId);
         }
     }
 }

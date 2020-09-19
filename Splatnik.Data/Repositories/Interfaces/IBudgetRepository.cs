@@ -12,8 +12,12 @@ namespace Splatnik.Data.Repositories.Interfaces
 		Task<Budget> GetBudgetAsync(int budgetId);
 		Task<IList<Budget>> GetUserBudgets(string userId);
         Task<Period> CreatePeriodAsync(Period period);
-		Task<Period> GetPeriodAsync(int periodId);
+		Task<Period> GetPeriodAsync(int budgetId, int periodId);
 		Task<IList<Period>> GetBudgetPeriodsAsync(int budgetId);
         Task<Period> GetCurrentPeriodAsync(int budgetId, DateTime today);
+        Task<Expense> CreateExpenseAsync(Expense expense);
+        Task<Expense> GetExpenseAsync(int periodId, int expenseId);
+        Task<Income> CreateIncomeAsync(Income income);
+        Task<Income> GetIncomeAsync(int periodId, int incomeId);
     }
 }

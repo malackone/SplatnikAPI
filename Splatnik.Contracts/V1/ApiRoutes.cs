@@ -27,16 +27,21 @@ namespace Splatnik.Contracts.V1
 		}
 
 
-		public static class User
+		public static class UserBudget
 		{
 			public const string NewBudget = Base + "/user/budgets";
-			public const string UserBudget = Base + "/user/budgets/{budgetId}";
-			public const string UserBudgets = Base + "/user/budgets";
+			public const string Budget = Base + "/user/budgets/{budgetId}";
+			public const string Budgets = Base + "/user/budgets";
 
-			public const string NewPeriod = Base + "/user/periods";
-			public const string BudgetPeriod = Base + "/user/periods/{periodId}"; // ??
-			public const string BudgetPeriods = Base + "/user/budgets/{budgetId}/periods"; // ??
+			public const string NewBudgetPeriod = Base + "/user/budgets/{budgetId}/periods";
+			public const string BudgetPeriods = Base + "/user/budgets/{budgetId}/periods";
+			public const string BudgetPeriod = Base + "/user/budgets/{budgetId}/periods/{periodId}";
 
+			public const string NewExpense = Base + "/user/budgets/{budgetId}/periods/{periodId}/expenses";
+			public const string BudgetPeriodExpense = Base + "/user/budgets/{budgetId}/periods/{periodId}/expenses/{expenseId}";
+
+			public const string NewIncome = Base + "/user/budgets/{budgetId}/periods/{periodId}/incomes";
+			public const string BudgetPeriodIncome = Base + "/user/budgets/{budgetId}/periods/{periodId}/incomes/{incomeId}";
 
 		}
 	}

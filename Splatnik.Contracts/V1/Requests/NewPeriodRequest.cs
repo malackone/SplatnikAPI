@@ -10,6 +10,5 @@ namespace Splatnik.Contracts.V1.Requests
 		public DateTime LastDay { get; set; }
 		public string DisplayName { get; set; }
 		public string Notes { get; set; }
-		public int BudgetId { get; set; }
 	}
 }

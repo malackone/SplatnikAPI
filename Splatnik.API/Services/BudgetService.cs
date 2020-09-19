@@ -24,7 +24,7 @@ namespace Splatnik.API.Services
 
 		}
 
-		public async Task<Budget> CreateBudgetAsync(NewBudgetRequest budgetRequest, string userId)
+		public async Task<Budget> NewBudgetAsync(NewBudgetRequest budgetRequest, string userId)
 		{
 
 			var budgetDto = new BudgetDto
@@ -53,9 +53,8 @@ namespace Splatnik.API.Services
 			return await _budgetRepository.GetUserBudgets(userId);
 		}
 
-		public async Task<Period> CreatePeriodAsync(NewPeriodRequest periodRequest, string userId)
+		public async Task<Period> NewPeriodAsync(NewPeriodRequest periodRequest, int budgetId)
         {
-
 			var periodDto = new PeriodDto
 			{
 				CreatedAt = DateTime.UtcNow,
@@ -63,7 +62,7 @@ namespace Splatnik.API.Services
 				FirstDay = periodRequest.FirstDay,
 				LastDay = periodRequest.LastDay,
 				Notes = periodRequest.Notes,
-				BudgetId = periodRequest.BudgetId
+				BudgetId = budgetId
 			};
 
 			var period = _mapper.Map<Period>(periodDto);
@@ -74,9 +73,9 @@ namespace Splatnik.API.Services
 
         }
 
-		public async Task<Period> GetPeriodAsync(int periodId)
+		public async Task<Period> GetPeriodAsync(int budgetId, int periodId)
         {
-			return await _budgetRepository.GetPeriodAsync(periodId);
+			return await _budgetRepository.GetPeriodAsync(budgetId, periodId);
         }
 
 		public async Task<Period> GetCurrentPeriodAsync(int budgetId, DateTime today)
@@ -88,5 +87,56 @@ namespace Splatnik.API.Services
         {
 			return await _budgetRepository.GetBudgetPeriodsAsync(budgetId);
         }
-    }
+
+        public async Task<Expense> NewExpenseAsync(int periodId, NewExpenseRequest request)
+        {
+			var expenseDto = new ExpenseDto
+			{
+				CreatedAt = DateTime.UtcNow,
+				IncomeDate = request.IncomeDate,
+				Name = request.Name,
+				Description = request.Description,
+				ExpanseValue = request.ExpanseValue,
+				CurrencyId = request.CurrencyId,
+				PeriodId = periodId
+			};
+
+			var expense = _mapper.Map<Expense>(expenseDto);
+
+			var created = await _budgetRepository.CreateExpenseAsync(expense);
+
+			return created;
+        }
+
+        public async Task<Expense> GetExpenseAsync(int periodId, int expenseId)
+        {
+			return await _budgetRepository.GetExpenseAsync(periodId, expenseId);
+        }
+
+        public async Task<Income> NewIncomeAsync(int periodID, NewIncomeRequest request)
+        {
+			var incomeDto = new IncomeDto
+			{
+				CreatedAt = DateTime.UtcNow,
+				IncomeDate = request.IncomeDate,
+				Name = request.Name,
+				Description = request.Description,
+				IncomeValue = request.IncomeValue,
+				CurrencyId = request.CurrencyId,
+				PeriodId = periodID
+			};
+
+			var income = _mapper.Map<Income>(incomeDto);
+
+			var created = await _budgetRepository.CreateIncomeAsync(income);
+
+			return created;
+        }
+
+		public async Task<Income> GetIncomeAsync(int periodId, int incomeId)
+		{
+			return await _budgetRepository.GetIncomeAsync(periodId, incomeId);
+		}
+
+	}
 }

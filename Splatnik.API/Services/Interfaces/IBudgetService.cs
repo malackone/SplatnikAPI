@@ -9,12 +9,16 @@ namespace Splatnik.API.Services.Interfaces
 {
 	public interface IBudgetService
 	{
-		Task<Budget> CreateBudgetAsync(NewBudgetRequest budgetRequest, string userId);
+		Task<Budget> NewBudgetAsync(NewBudgetRequest budgetRequest, string userId);
 		Task<Budget> GetBudgetAsync(int budgetId);
 		Task<IList<Budget>> GetUserBudgets(string userId);
-        Task<Period> CreatePeriodAsync(NewPeriodRequest request, string userId);
-        Task<Period> GetPeriodAsync(int periodId);
+        Task<Period> NewPeriodAsync(NewPeriodRequest request, int budgetId);
+        Task<Period> GetPeriodAsync(int budgetId, int periodId);
         Task<Period> GetCurrentPeriodAsync(int budgetId, DateTime today);
         Task<IList<Period>> GetBudgetPeriodsAsync(int budgetId);
+        Task<Expense> NewExpenseAsync(int periodId, NewExpenseRequest request);
+        Task<Expense> GetExpenseAsync(int periodId, int expenseId);
+        Task<Income> NewIncomeAsync(int periodID, NewIncomeRequest request);
+        Task<Income> GetIncomeAsync(int periodId, int incomeId);
     }
 }

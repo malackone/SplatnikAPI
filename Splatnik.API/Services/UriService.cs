@@ -16,19 +16,38 @@ namespace Splatnik.API.Services
 			_baseUri = baseUri;
 		}
 
-		public Uri GetBudgetUri(string budgetId)
+		public Uri GetBudgetUri(int budgetId)
 		{
-			return new Uri(_baseUri + ApiRoutes.User.UserBudget.Replace("{budgetId}", budgetId));
+			return new Uri(_baseUri + ApiRoutes.UserBudget.Budget
+				.Replace("{budgetId}", budgetId.ToString()));
 		}
 
-		public Uri GetPeriodUri(string periodId)
+		public Uri GetPeriodUri(int budgetId, int periodId)
         {
-			return new Uri(_baseUri + ApiRoutes.User.BudgetPeriod.Replace("{periodId}", periodId));
+			return new Uri(_baseUri + ApiRoutes.UserBudget.BudgetPeriod
+				.Replace("{budgetId}", budgetId.ToString())
+				.Replace("{periodId}", periodId.ToString()));
         }
 
 		public Uri GetConfirmationLink(string email, string token)
 		{
 			return new Uri(_baseUri + ApiRoutes.Identity.ConfirmEmail + "/" + email + "/" + token);
 		}
-	}
+
+        public Uri GetExpenseUri(int budgetId, int periodId, int expenseId)
+        {
+			return new Uri(_baseUri + ApiRoutes.UserBudget.BudgetPeriodExpense
+				.Replace("{budgetId}", budgetId.ToString())
+				.Replace("{periodId}", periodId.ToString())
+				.Replace("{expenseId}", expenseId.ToString()));
+		}
+
+        public Uri GetIncomeUri(int budgetId, int periodId, int incomeId)
+        {
+			return new Uri(_baseUri + ApiRoutes.UserBudget.BudgetPeriodExpense
+				.Replace("{budgetId}", budgetId.ToString())
+				.Replace("{periodId}", periodId.ToString())
+				.Replace("{incomeId}", incomeId.ToString()));
+		}
+    }
 }

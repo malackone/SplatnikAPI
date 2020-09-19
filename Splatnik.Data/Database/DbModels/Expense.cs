@@ -34,5 +34,12 @@ namespace Splatnik.Data.Database.DbModels
 
 		[ForeignKey(nameof(PeriodId))]
 		public Period Period { get; set; }
+
+
+		[Required]
+		public int CurrencyId { get; set; }
+
+		[ForeignKey(nameof(CurrencyId))]
+		public Currency Currency { get; set; }
 	}
 }
