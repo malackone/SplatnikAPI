@@ -106,6 +106,12 @@ namespace Splatnik.Data.Repositories
 			return (await _dataContext.SaveChangesAsync()) > 0;
 
         }
+        
+		public async Task<bool> DeleteExepenseAsync(Expense expense)
+        {
+			_dataContext.Expenses.Remove(expense);
+			return (await _dataContext.SaveChangesAsync()) > 0;
+        }
         #endregion
 
         #region Incomes
@@ -141,6 +147,12 @@ namespace Splatnik.Data.Repositories
 			_dataContext.Update(currentIncome);
 			return (await _dataContext.SaveChangesAsync()) > 0;
         }
+
+        public async Task<bool> DeleteIncomeAsync(Income income)
+        {
+			_dataContext.Incomes.Remove(income);
+			return (await _dataContext.SaveChangesAsync()) > 0;
+		}
         #endregion
 
     }

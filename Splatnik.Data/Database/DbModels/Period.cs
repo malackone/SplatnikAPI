@@ -36,5 +36,7 @@ namespace Splatnik.Data.Database.DbModels
 
 		public virtual List<Income> Incomes { get; set; }
 		public virtual List<Expense> Expenses { get; set; }
+		public virtual List<CreditPayment> CreditPayments { get; set; }
+		public virtual List<DebtPayment> DebtPayments { get; set; }
 	}
 }

@@ -24,6 +24,7 @@ namespace Splatnik.API.Services
 
 		}
 
+
         public async Task<Budget> NewBudgetAsync(BudgetRequest budgetRequest, string userId)
 		{
 
@@ -52,6 +53,7 @@ namespace Splatnik.API.Services
 		{
 			return await _budgetRepository.GetUserBudgets(userId);
 		}
+
 
 		public async Task<Period> NewPeriodAsync(PeriodRequest periodRequest, int budgetId)
         {
@@ -88,7 +90,8 @@ namespace Splatnik.API.Services
 			return await _budgetRepository.GetBudgetPeriodsAsync(budgetId);
         }
 
-        public async Task<Expense> NewExpenseAsync(int periodId, ExpenseRequest request)
+        
+		public async Task<Expense> NewExpenseAsync(int periodId, ExpenseRequest request)
         {
 			var expenseDto = new ExpenseDto
 			{
@@ -112,6 +115,11 @@ namespace Splatnik.API.Services
         {
 			return await _budgetRepository.GetExpenseAsync(periodId, expenseId);
         }
+        
+		public Task<IList<Expense>> GetExpensesAsync(int periodId)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<bool> UpdateExpenseAsync(int expenseId, UpdateExpenseRequest request)
         {
@@ -130,6 +138,12 @@ namespace Splatnik.API.Services
 
 			return await _budgetRepository.UpdateExpenseAsync(expense);
 		}
+        
+		public async Task<bool> DeleteExpenseAsync(Expense expense)
+        {
+			return await _budgetRepository.DeleteExepenseAsync(expense);
+        }
+
 
         public async Task<Income> NewIncomeAsync(int periodID, IncomeRequest request)
         {
@@ -155,6 +169,11 @@ namespace Splatnik.API.Services
 		{
 			return await _budgetRepository.GetIncomeAsync(periodId, incomeId);
 		}
+        
+		public Task<IList<Income>> GetIncomesAsync(int periodId)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<bool> UpdateIncomeAsync(int incomeId, UpdateIncomeRequest request)
         {
@@ -174,14 +193,12 @@ namespace Splatnik.API.Services
 			return await _budgetRepository.UpdateIncomeAsync(income);
         }
 
-        public Task<IList<Expense>> GetExpensesAsync(int periodId)
+        public async Task<bool> DeleteIncomeAsync(Income income)
         {
-            throw new NotImplementedException();
+			return await _budgetRepository.DeleteIncomeAsync(income);
         }
 
-        public Task<IList<Income>> GetIncomesAsync(int periodId)
-        {
-            throw new NotImplementedException();
-        }
+
+
     }
 }

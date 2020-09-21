@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 using Splatnik.API.Security;
 using Splatnik.API.Services.Interfaces;
 using Splatnik.Contracts.V1;
@@ -343,6 +342,44 @@ namespace Splatnik.API.Controllers.V1
 
 		}
 
+
+		[HttpDelete(ApiRoutes.UserBudget.DeleteExpense)]
+		public async Task<IActionResult> DeleteExpense([FromRoute] int budgetId, int periodId, int expenseId)
+        {
+			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
+
+			// check if user exists
+			var userExists = await _identityService.CheckIfUserExists(userId);
+			if (!userExists)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
+			}
+
+			var budget = await _budgetService.GetBudgetAsync(budgetId);
+			if (budget == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no budget with id: {budgetId}" }));
+			}
+
+			if (budget.UserId != userId)
+			{
+				return Forbid();
+			}
+
+			var expenseInDb = await _budgetService.GetExpenseAsync(periodId, expenseId);
+			if(expenseInDb == null)
+            {
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no expense with id:{expenseId}"}));
+            }
+
+			var deleteExpense = await _budgetService.DeleteExpenseAsync(expenseInDb);
+			if (!deleteExpense)
+			{
+				return BadRequest(new ErrorResponse(new ErrorModel { Message = $"Could not delete expense with id: {expenseId}" }));
+			}
+
+			return NoContent();
+		}
 		#endregion
 
 		#region Incomes
@@ -468,7 +505,51 @@ namespace Splatnik.API.Controllers.V1
 
 		}
 
-		#endregion
 
-	}
+		[HttpDelete(ApiRoutes.UserBudget.DeleteIncome)]
+		public async Task<IActionResult> DeleteIncome([FromRoute] int budgetId, int periodId, int incomeId)
+        {
+			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
+
+			// check if user exists
+			var userExists = await _identityService.CheckIfUserExists(userId);
+			if (!userExists)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
+			}
+
+			var budget = await _budgetService.GetBudgetAsync(budgetId);
+			if (budget == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no budget with id: {budgetId}" }));
+			}
+
+			if (budget.UserId != userId)
+			{
+				return Forbid();
+			}
+
+			var incomeInDb = await _budgetService.GetIncomeAsync(periodId, incomeId);
+			if(incomeInDb == null)
+            {
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is not income with id:{incomeId}" }));
+            }
+
+
+			var deleteIncome = await _budgetService.DeleteIncomeAsync(incomeInDb);
+			if (!deleteIncome)
+			{
+				return BadRequest(new ErrorResponse(new ErrorModel { Message = $"Could not delete income with id:{incomeId}" }));
+			}
+
+			return NoContent();
+		}
+        #endregion
+
+        #region Debts
+
+
+
+        #endregion
+    }
 }

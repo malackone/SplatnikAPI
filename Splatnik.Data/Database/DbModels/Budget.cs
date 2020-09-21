@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
-using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace Splatnik.Data.Database.DbModels
 {
@@ -36,5 +34,7 @@ namespace Splatnik.Data.Database.DbModels
 		public IdentityUser User { get; set; }
 
 		public virtual List<Period> Periods { get; set; }
+		public virtual List<Credit> Credits { get; set; }
+		public virtual List<Debt> Debts { get; set; }
 	}
 }

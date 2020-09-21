@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace Splatnik.Contracts.V1
@@ -33,19 +34,32 @@ namespace Splatnik.Contracts.V1
 			public const string Budget = Base + "/user/budgets/{budgetId}";
 			public const string Budgets = Base + "/user/budgets";
 
-			public const string NewBudgetPeriod = Base + "/user/budgets/{budgetId}/periods";
-			public const string BudgetPeriods = Base + "/user/budgets/{budgetId}/periods";
-			public const string BudgetPeriod = Base + "/user/budgets/{budgetId}/periods/{periodId}";
+			public const string NewBudgetPeriod = Budget + "/periods";
+			public const string BudgetPeriods = Budget + "/periods";
+			public const string BudgetPeriod = Budget + "/periods/{periodId}";
 
-			public const string NewExpense = Base + "/user/budgets/{budgetId}/periods/{periodId}/expenses";
-			public const string BudgetPeriodExpense = Base + "/user/budgets/{budgetId}/periods/{periodId}/expenses/{expenseId}";
-			public const string UpdateExpense = Base + "/user/budgets/{budgetId}/periods/{periodId}/expenses/{expenseId}";
+			public const string NewExpense = BudgetPeriod + "/expenses";
+			public const string BudgetPeriodExpenses = BudgetPeriod + "/expenses";
+			public const string BudgetPeriodExpense = BudgetPeriod + "/expenses/{expenseId}";
+			public const string UpdateExpense = BudgetPeriod + "/expenses/{expenseId}";
+			public const string DeleteExpense = BudgetPeriod + "/expenses/{expenseId}";
 
+			public const string NewIncome = BudgetPeriod + "/incomes";
+			public const string BudgetPeriodIncomes = BudgetPeriod + "/incomes";
+			public const string BudgetPeriodIncome = BudgetPeriod + "/incomes/{incomeId}";
+			public const string UpdateIncome = BudgetPeriod + "/incomes/{incomeId}";
+			public const string DeleteIncome = BudgetPeriod + "/incomes/{incomeId}";
 
-			public const string NewIncome = Base + "/user/budgets/{budgetId}/periods/{periodId}/incomes";
-			public const string BudgetPeriodIncome = Base + "/user/budgets/{budgetId}/periods/{periodId}/incomes/{incomeId}";
-			public const string UpdateIncome = Base + "/user/budgets/{budgetId}/periods/{periodId}/incomes/{incomeId}";
-
+			public const string NewDebt = Budget + "/debts";
+			public const string BudgetDebts = Budget + "/debts";
+			public const string BudgetDebt = Budget + "/debts/{debtId}";
+			public const string UpdateBudgetDebt = Budget + "/debts/{debtId}";
+			public const string DeleteBudgetDebt = Budget + "/debts/{debtId}";
 		}
+
+		public static class UserSetting
+        {
+
+        }
 	}
 }
