@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Splatnik.API.Filters;
+using Splatnik.API.Security;
 using Splatnik.API.Services;
 using Splatnik.API.Services.Interfaces;
 using Splatnik.API.Settings;
@@ -72,14 +73,11 @@ namespace Splatnik.API.Installers
 
 			services.AddSingleton(tokenValidationParameters);
 
-
-
-
 			services.AddAuthorization(options =>
 			{
-				options.AddPolicy("Admin", policy => { policy.RequireRole("Admin"); });
+				options.AddPolicy(SecurityPolicies.Admin, policy => { policy.RequireRole(SecurityPolicies.Admin); });
 
-				options.AddPolicy("User", policy =>{ policy.RequireRole("User"); });
+				options.AddPolicy(SecurityPolicies.User, policy =>{ policy.RequireRole(SecurityPolicies.User); });
 			});
 
 			services.AddSingleton<IUriService>(prov =>

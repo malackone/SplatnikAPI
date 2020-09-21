@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using Splatnik.API.Security;
 using Splatnik.API.Services.Interfaces;
 using Splatnik.API.Settings;
 using Splatnik.Contracts.V1;
@@ -14,7 +15,7 @@ using Splatnik.Contracts.V1.Responses.IdentityManagement;
 
 namespace Splatnik.API.Controllers.V1
 {
-	//[Authorize(Policy = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+	[Authorize(Policy = SecurityPolicies.Admin, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class AdminController : Controller
 	{
 		private readonly IAdminService _adminService;

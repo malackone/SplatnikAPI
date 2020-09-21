@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Splatnik.API.Security;
 using Splatnik.API.Services.Interfaces;
 using Splatnik.Contracts.V1;
 using Splatnik.Contracts.V1.Requests;
@@ -13,7 +14,7 @@ using Splatnik.Contracts.V1.Responses;
 
 namespace Splatnik.API.Controllers.V1
 {
-	[Authorize(Policy = "User", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+	[Authorize(Policy = SecurityPolicies.User, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class UserBudgetController : Controller
 	{
 		private readonly IBudgetService _budgetService;
