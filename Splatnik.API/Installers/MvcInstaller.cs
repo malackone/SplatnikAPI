@@ -87,10 +87,6 @@ namespace Splatnik.API.Installers
 				var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent(), "/");
 				return new UriService(absoluteUri);
 			});
-
-
-
-
 		}
 	}
 }

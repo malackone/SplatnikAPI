@@ -20,10 +20,12 @@ namespace Splatnik.API.Services.Interfaces
 
         Task<Expense> NewExpenseAsync(int periodId, ExpenseRequest request);
         Task<Expense> GetExpenseAsync(int periodId, int expenseId);
+        Task<IList<Expense>> GetExpensesAsync(int periodId);
         Task<bool> UpdateExpenseAsync(int expenseId, UpdateExpenseRequest request);
 
         Task<Income> NewIncomeAsync(int periodID, IncomeRequest request);
         Task<Income> GetIncomeAsync(int periodId, int incomeId);
+        Task<IList<Income>> GetIncomesAsync(int periodId);
         Task<bool> UpdateIncomeAsync(int incomeId, UpdateIncomeRequest request);
     }
 }

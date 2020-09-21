@@ -21,7 +21,8 @@ namespace Splatnik.Data.Repositories
 			_dataContext = dataContext;
 		}
 
-		public async Task<Budget> CreateBudgetAsync(Budget budget)
+        #region Budget
+        public async Task<Budget> CreateBudgetAsync(Budget budget)
 		{
 
 			_dataContext.Budgets.Add(budget);
@@ -29,8 +30,8 @@ namespace Splatnik.Data.Repositories
 
 			return budget;
 		}
-
-        public async Task<Budget> GetBudgetAsync(int budgetId)
+        
+		public async Task<Budget> GetBudgetAsync(int budgetId)
 		{
 			return await _dataContext.Budgets
 				.Include(x => x.Periods)
@@ -39,35 +40,39 @@ namespace Splatnik.Data.Repositories
 				.ThenInclude(x => x.Expenses)
 				.FirstOrDefaultAsync(x => x.Id == budgetId);
 		}
-
+		
 		public async Task<IList<Budget>> GetUserBudgets(string userId)
 		{
 			return await _dataContext.Budgets.Where(x => x.UserId == userId).ToListAsync();
 		}
+        #endregion
 
-        public async Task<Period> CreatePeriodAsync(Period period)
+        #region Period
+		public async Task<Period> CreatePeriodAsync(Period period)
         {
 			_dataContext.Periods.Add(period);
 			await _dataContext.SaveChangesAsync();
 
 			return period;
         }
-
+		
 		public async Task<Period> GetPeriodAsync(int budgetId, int periodId) 
 		{
 			return await _dataContext.Periods.FirstOrDefaultAsync(x => x.Id == periodId && x.BudgetId == budgetId);
 		}
-
+		
 		public async Task<IList<Period>> GetBudgetPeriodsAsync(int budgetId)
         {
 			return await _dataContext.Periods.Where(x => x.BudgetId == budgetId).ToListAsync();
         }
-
-        public async Task<Period> GetCurrentPeriodAsync(int budgetId, DateTime today)
+        
+		public async Task<Period> GetCurrentPeriodAsync(int budgetId, DateTime today)
         {
 			return await _dataContext.Periods.FirstOrDefaultAsync(x => x.BudgetId == budgetId && x.FirstDay >= today && x.LastDay <= today);
         }
+        #endregion
 
+        #region Expenses
         public async Task<Expense> CreateExpenseAsync(Expense expense)
         {
 			_dataContext.Expenses.Add(expense);
@@ -75,13 +80,17 @@ namespace Splatnik.Data.Repositories
 
 			return expense;
         }
-
-        public async Task<Expense> GetExpenseAsync(int periodId, int expenseId)
+        
+		public async Task<Expense> GetExpenseAsync(int periodId, int expenseId)
         {
 			return await _dataContext.Expenses.FirstOrDefaultAsync(x => x.Id == expenseId && x.PeriodId == periodId);
         }
-
-
+        
+		public async Task<IList<Expense>> GetExpensesAsync(int periodId)
+        {
+			return await _dataContext.Expenses.Where(x => x.PeriodId == periodId).ToListAsync();
+        }
+		
 		public async Task<bool> UpdateExpenseAsync(Expense expense)
         {
 			var currentExpense = await _dataContext.Expenses.FirstOrDefaultAsync(x => x.Id == expense.Id);
@@ -97,7 +106,9 @@ namespace Splatnik.Data.Repositories
 			return (await _dataContext.SaveChangesAsync()) > 0;
 
         }
+        #endregion
 
+        #region Incomes
         public async Task<Income> CreateIncomeAsync(Income income)
         {
 			_dataContext.Incomes.Add(income);
@@ -105,13 +116,18 @@ namespace Splatnik.Data.Repositories
 
 			return income;
         }
-
-        public async Task<Income> GetIncomeAsync(int periodId, int incomeId)
+        
+		public async Task<Income> GetIncomeAsync(int periodId, int incomeId)
         {
 			return await _dataContext.Incomes.FirstOrDefaultAsync(x => x.Id == incomeId && x.PeriodId == periodId);
         }
-
-        public async Task<bool> UpdateIncomeAsync(Income income)
+        
+		public async Task<IList<Income>> GetIncomesAsync(int periodId)
+        {
+			return await _dataContext.Incomes.Where(x => x.PeriodId == periodId).ToListAsync();
+        }
+        
+		public async Task<bool> UpdateIncomeAsync(Income income)
         {
 			var currentIncome = await _dataContext.Incomes.FirstOrDefaultAsync(x => x.Id == income.Id);
 
@@ -125,5 +141,7 @@ namespace Splatnik.Data.Repositories
 			_dataContext.Update(currentIncome);
 			return (await _dataContext.SaveChangesAsync()) > 0;
         }
+        #endregion
+
     }
 }

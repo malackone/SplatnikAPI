@@ -173,5 +173,15 @@ namespace Splatnik.API.Services
 
 			return await _budgetRepository.UpdateIncomeAsync(income);
         }
+
+        public Task<IList<Expense>> GetExpensesAsync(int periodId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<Income>> GetIncomesAsync(int periodId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

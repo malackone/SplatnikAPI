@@ -9,6 +9,14 @@
     <Compile Remove="Database\Migrations\20200827212926_BasicApplicationModel.Designer.cs" />
     <Compile Remove="Database\Migrations\20200827213221_ModelUpdate.cs" />
     <Compile Remove="Database\Migrations\20200827213221_ModelUpdate.Designer.cs" />
+    <Compile Remove="Database\Migrations\20200921160911_DebtAndDebtPaymentModel.cs" />
+    <Compile Remove="Database\Migrations\20200921160911_DebtAndDebtPaymentModel.Designer.cs" />
+    <Compile Remove="Database\Migrations\20200921161111_DebtAndDebtPaymentModel.cs" />
+    <Compile Remove="Database\Migrations\20200921161111_DebtAndDebtPaymentModel.Designer.cs" />
+    <Compile Remove="Database\Migrations\20200921163025_DebtAndDebtPaymentModel.cs" />
+    <Compile Remove="Database\Migrations\20200921163025_DebtAndDebtPaymentModel.Designer.cs" />
+    <Compile Remove="Database\Migrations\20200921181114_CreditAndCreditPaymentModel.cs" />
+    <Compile Remove="Database\Migrations\20200921181114_CreditAndCreditPaymentModel.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

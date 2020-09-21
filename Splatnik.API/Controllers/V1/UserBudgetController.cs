@@ -95,7 +95,6 @@ namespace Splatnik.API.Controllers.V1
 		}
         #endregion
 
-
         #region Periods
 		[HttpPost(ApiRoutes.UserBudget.NewBudgetPeriod)]
 		public async Task<IActionResult> NewPeriod([FromRoute] int budgetId, [FromBody] PeriodRequest request)
@@ -219,7 +218,6 @@ namespace Splatnik.API.Controllers.V1
 
 		}
         #endregion
-
 
         #region Expenses
 		[HttpPost(ApiRoutes.UserBudget.NewExpense)]
@@ -346,7 +344,6 @@ namespace Splatnik.API.Controllers.V1
 		}
 
 		#endregion
-
 
 		#region Incomes
 		[HttpPost(ApiRoutes.UserBudget.NewIncome)]
