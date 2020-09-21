@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Validation
 {
-    public class NewIncomeRequestValidator : AbstractValidator<NewIncomeRequest>
+    public class NewIncomeRequestValidator : AbstractValidator<IncomeRequest>
     {
         public NewIncomeRequestValidator()
         {

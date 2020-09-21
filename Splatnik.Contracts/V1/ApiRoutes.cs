@@ -39,9 +39,12 @@ namespace Splatnik.Contracts.V1
 
 			public const string NewExpense = Base + "/user/budgets/{budgetId}/periods/{periodId}/expenses";
 			public const string BudgetPeriodExpense = Base + "/user/budgets/{budgetId}/periods/{periodId}/expenses/{expenseId}";
+			public const string UpdateExpense = Base + "/user/budgets/{budgetId}/periods/{periodId}/expenses/{expenseId}";
+
 
 			public const string NewIncome = Base + "/user/budgets/{budgetId}/periods/{periodId}/incomes";
 			public const string BudgetPeriodIncome = Base + "/user/budgets/{budgetId}/periods/{periodId}/incomes/{incomeId}";
+			public const string UpdateIncome = Base + "/user/budgets/{budgetId}/periods/{periodId}/incomes/{incomeId}";
 
 		}
 	}

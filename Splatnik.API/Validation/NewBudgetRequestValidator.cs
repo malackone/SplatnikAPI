@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Validation
 {
-	public class NewBudgetRequestValidator : AbstractValidator<NewBudgetRequest>
+	public class NewBudgetRequestValidator : AbstractValidator<BudgetRequest>
 	{
 		public NewBudgetRequestValidator()
 		{

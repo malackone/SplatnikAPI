@@ -5,6 +5,7 @@ using Splatnik.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +81,23 @@ namespace Splatnik.Data.Repositories
 			return await _dataContext.Expenses.FirstOrDefaultAsync(x => x.Id == expenseId && x.PeriodId == periodId);
         }
 
+
+		public async Task<bool> UpdateExpenseAsync(Expense expense)
+        {
+			var currentExpense = await _dataContext.Expenses.FirstOrDefaultAsync(x => x.Id == expense.Id);
+
+			currentExpense.IncomeDate = expense.IncomeDate;
+			currentExpense.Name = expense.Name;
+			currentExpense.Description = expense.Description;
+			currentExpense.ExpenseValue = expense.ExpenseValue;
+			currentExpense.CurrencyId = expense.CurrencyId;
+			currentExpense.PeriodId = expense.PeriodId;
+
+			_dataContext.Update(currentExpense);
+			return (await _dataContext.SaveChangesAsync()) > 0;
+
+        }
+
         public async Task<Income> CreateIncomeAsync(Income income)
         {
 			_dataContext.Incomes.Add(income);
@@ -91,6 +109,21 @@ namespace Splatnik.Data.Repositories
         public async Task<Income> GetIncomeAsync(int periodId, int incomeId)
         {
 			return await _dataContext.Incomes.FirstOrDefaultAsync(x => x.Id == incomeId && x.PeriodId == periodId);
+        }
+
+        public async Task<bool> UpdateIncomeAsync(Income income)
+        {
+			var currentIncome = await _dataContext.Incomes.FirstOrDefaultAsync(x => x.Id == income.Id);
+
+			currentIncome.IncomeDate = income.IncomeDate;
+			currentIncome.Name = income.Name;
+			currentIncome.Description = income.Description;
+			currentIncome.IncomeValue = income.IncomeValue;
+			currentIncome.CurrencyId = income.CurrencyId;
+			currentIncome.PeriodId = income.PeriodId;
+
+			_dataContext.Update(currentIncome);
+			return (await _dataContext.SaveChangesAsync()) > 0;
         }
     }
 }

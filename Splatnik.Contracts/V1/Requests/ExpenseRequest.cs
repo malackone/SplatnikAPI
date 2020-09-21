@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Splatnik.Contracts.V1.Requests
 {
-    public class NewExpenseRequest
+    public class ExpenseRequest
     {
 		public DateTime IncomeDate { get; set; }
 
@@ -12,7 +12,7 @@ namespace Splatnik.Contracts.V1.Requests
 
 		public string Description { get; set; }
 
-		public decimal ExpanseValue { get; set; }
+		public decimal ExpenseValue { get; set; }
 		public int CurrencyId { get; set; }
 
 	}

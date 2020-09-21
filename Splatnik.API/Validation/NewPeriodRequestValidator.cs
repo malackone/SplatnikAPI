@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Validation
 {
-    public class NewPeriodRequestValidator : AbstractValidator<NewPeriodRequest>
+    public class NewPeriodRequestValidator : AbstractValidator<PeriodRequest>
     {
         public NewPeriodRequestValidator()
         {

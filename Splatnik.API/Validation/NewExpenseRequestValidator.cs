@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Validation
 {
-    public class NewExpenseRequestValidator : AbstractValidator<NewExpenseRequest>
+    public class NewExpenseRequestValidator : AbstractValidator<ExpenseRequest>
     {
         public NewExpenseRequestValidator()
         {
@@ -23,7 +23,7 @@ namespace Splatnik.API.Validation
             RuleFor(x => x.Description)
                 .MaximumLength(200);
 
-            RuleFor(x => x.ExpanseValue)
+            RuleFor(x => x.ExpenseValue)
                 .NotEmpty()
                 .NotNull()
                 .GreaterThan(0)

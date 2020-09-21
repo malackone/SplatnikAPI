@@ -32,7 +32,7 @@ namespace Splatnik.API.Controllers.V1
 
         #region Budgets
         [HttpPost(ApiRoutes.UserBudget.NewBudget)]
-		public async Task<IActionResult> NewBudget([FromBody] NewBudgetRequest request)
+		public async Task<IActionResult> NewBudget([FromBody] BudgetRequest request)
 		{ 
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
 
@@ -97,7 +97,7 @@ namespace Splatnik.API.Controllers.V1
 
         #region Periods
 		[HttpPost(ApiRoutes.UserBudget.NewBudgetPeriod)]
-		public async Task<IActionResult> NewPeriod([FromRoute] int budgetId, [FromBody] NewPeriodRequest request)
+		public async Task<IActionResult> NewPeriod([FromRoute] int budgetId, [FromBody] PeriodRequest request)
         {
 
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
@@ -222,7 +222,7 @@ namespace Splatnik.API.Controllers.V1
 
         #region Expenses
 		[HttpPost(ApiRoutes.UserBudget.NewExpense)]
-		public async Task<IActionResult> NewExpense([FromRoute] int budgetId, int periodId, [FromBody] NewExpenseRequest request)
+		public async Task<IActionResult> NewExpense([FromRoute] int budgetId, int periodId, [FromBody] ExpenseRequest request)
         {
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
 
@@ -299,12 +299,57 @@ namespace Splatnik.API.Controllers.V1
 
 			return Ok(new Response<ExpenseResponse>(_mapper.Map<ExpenseResponse>(expense)));
 		}
+
+
+		[HttpPatch(ApiRoutes.UserBudget.UpdateExpense)]
+		public async Task<IActionResult> UpdateExpense([FromRoute] int budgetId, int periodId, int expenseId, [FromBody] UpdateExpenseRequest request)
+		{
+			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
+
+			// check if user exists
+			var userExists = await _identityService.CheckIfUserExists(userId);
+			if (!userExists)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
+			}
+
+			var budget = await _budgetService.GetBudgetAsync(budgetId);
+			if (budget == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no budget with id: {budgetId}" }));
+			}
+
+			if (budget.UserId != userId)
+			{
+				return Forbid();
+			}
+
+			var expenseInDb = await _budgetService.GetExpenseAsync(periodId, expenseId);
+
+			if (expenseInDb == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no expense with id: {expenseId} for period id: {periodId}" }));
+			}
+
+			var updateExpense = await _budgetService.UpdateExpenseAsync(periodId, request);
+
+			if (!updateExpense)
+			{
+				return BadRequest(new ErrorResponse(new ErrorModel { Message = $"Could not update expense with id:{expenseId}" }));
+			}
+
+			var updatedExpense = await _budgetService.GetIncomeAsync(request.PeriodId, expenseId);
+
+			return Ok(new Response<ExpenseResponse>(_mapper.Map<ExpenseResponse>(updatedExpense)));
+
+		}
+
 		#endregion
 
 
 		#region Incomes
 		[HttpPost(ApiRoutes.UserBudget.NewIncome)]
-		public async Task<IActionResult> NewIncome([FromRoute] int budgetId, int periodId, [FromBody] NewIncomeRequest request)
+		public async Task<IActionResult> NewIncome([FromRoute] int budgetId, int periodId, [FromBody] IncomeRequest request)
 		{
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
 
@@ -379,6 +424,50 @@ namespace Splatnik.API.Controllers.V1
 			}
 
 			return Ok(new Response<IncomeResponse>(_mapper.Map<IncomeResponse>(income)));
+		}
+
+
+		[HttpPatch(ApiRoutes.UserBudget.UpdateIncome)]
+		public async Task<IActionResult> UpdateIncome([FromRoute] int budgetId, int periodId, int incomeId, [FromBody] UpdateIncomeRequest request)
+        {
+			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
+
+			// check if user exists
+			var userExists = await _identityService.CheckIfUserExists(userId);
+			if (!userExists)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
+			}
+
+			var budget = await _budgetService.GetBudgetAsync(budgetId);
+			if (budget == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no budget with id: {budgetId}" }));
+			}
+
+			if (budget.UserId != userId)
+			{
+				return Forbid();
+			}
+
+			var incomeInDb = await _budgetService.GetIncomeAsync(periodId, incomeId);
+
+			if(incomeInDb == null)
+            {
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no income with id: {incomeId} for period id: {periodId}" }));
+			}
+
+			var updateIncome = await _budgetService.UpdateIncomeAsync(periodId, request);
+
+            if (!updateIncome)
+            {
+				return BadRequest(new ErrorResponse(new ErrorModel { Message = $"Could not update income with id:{incomeId}" }));
+            }
+
+			var updatedIncome = await _budgetService.GetIncomeAsync(request.PeriodId, incomeId);
+
+			return Ok(new Response<IncomeResponse>(_mapper.Map<IncomeResponse>(updatedIncome)));
+
 		}
 
 		#endregion

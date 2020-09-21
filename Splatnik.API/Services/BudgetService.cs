@@ -24,7 +24,7 @@ namespace Splatnik.API.Services
 
 		}
 
-		public async Task<Budget> NewBudgetAsync(NewBudgetRequest budgetRequest, string userId)
+        public async Task<Budget> NewBudgetAsync(BudgetRequest budgetRequest, string userId)
 		{
 
 			var budgetDto = new BudgetDto
@@ -53,7 +53,7 @@ namespace Splatnik.API.Services
 			return await _budgetRepository.GetUserBudgets(userId);
 		}
 
-		public async Task<Period> NewPeriodAsync(NewPeriodRequest periodRequest, int budgetId)
+		public async Task<Period> NewPeriodAsync(PeriodRequest periodRequest, int budgetId)
         {
 			var periodDto = new PeriodDto
 			{
@@ -88,7 +88,7 @@ namespace Splatnik.API.Services
 			return await _budgetRepository.GetBudgetPeriodsAsync(budgetId);
         }
 
-        public async Task<Expense> NewExpenseAsync(int periodId, NewExpenseRequest request)
+        public async Task<Expense> NewExpenseAsync(int periodId, ExpenseRequest request)
         {
 			var expenseDto = new ExpenseDto
 			{
@@ -96,7 +96,7 @@ namespace Splatnik.API.Services
 				IncomeDate = request.IncomeDate,
 				Name = request.Name,
 				Description = request.Description,
-				ExpanseValue = request.ExpanseValue,
+				ExpenseValue = request.ExpenseValue,
 				CurrencyId = request.CurrencyId,
 				PeriodId = periodId
 			};
@@ -113,7 +113,25 @@ namespace Splatnik.API.Services
 			return await _budgetRepository.GetExpenseAsync(periodId, expenseId);
         }
 
-        public async Task<Income> NewIncomeAsync(int periodID, NewIncomeRequest request)
+        public async Task<bool> UpdateExpenseAsync(int expenseId, UpdateExpenseRequest request)
+        {
+			var expenseDto = new UpdateExpenseDto
+			{
+				Id = expenseId,
+				Name = request.Name,
+				Description = request.Description,
+				IncomeDate = request.IncomeDate,
+				ExpenseValue = request.ExpenseValue,
+				CurrencyId = request.CurrencyId,
+				PeriodId = request.PeriodId
+			};
+
+			var expense = _mapper.Map<Expense>(expenseDto);
+
+			return await _budgetRepository.UpdateExpenseAsync(expense);
+		}
+
+        public async Task<Income> NewIncomeAsync(int periodID, IncomeRequest request)
         {
 			var incomeDto = new IncomeDto
 			{
@@ -138,5 +156,22 @@ namespace Splatnik.API.Services
 			return await _budgetRepository.GetIncomeAsync(periodId, incomeId);
 		}
 
-	}
+        public async Task<bool> UpdateIncomeAsync(int incomeId, UpdateIncomeRequest request)
+        {
+			var incomeDto = new UpdateIncomeDto
+			{
+				Id = incomeId,
+				Name = request.Name,
+				Description = request.Description,
+				IncomeDate = request.IncomeDate,
+				IncomeValue = request.IncomeValue,
+				CurrencyId = request.CurrencyId,
+				PeriodId = request.PeriodId
+			};
+
+			var income = _mapper.Map<Income>(incomeDto);
+
+			return await _budgetRepository.UpdateIncomeAsync(income);
+        }
+    }
 }

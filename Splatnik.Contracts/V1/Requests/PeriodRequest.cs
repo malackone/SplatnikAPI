@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Splatnik.Contracts.V1.Requests
 {
-    public class NewPeriodRequest
+    public class PeriodRequest
     {
 		public DateTime FirstDay { get; set; }
 		public DateTime LastDay { get; set; }

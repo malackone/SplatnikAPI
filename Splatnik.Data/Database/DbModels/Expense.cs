@@ -27,7 +27,7 @@ namespace Splatnik.Data.Database.DbModels
 
 		[Required]
 		[Column(TypeName = "decimal(10, 2)")]
-		public decimal ExpanseValue { get; set; }
+		public decimal ExpenseValue { get; set; }
 
 		[Required]
 		public int PeriodId { get; set; }
