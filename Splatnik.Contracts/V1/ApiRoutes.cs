@@ -30,27 +30,27 @@ namespace Splatnik.Contracts.V1
 
 		public static class UserBudget
 		{
-			public const string NewBudget = Base + "/user/budgets";
+			public const string CreateBudget = Base + "/user/budgets";
 			public const string Budget = Base + "/user/budgets/{budgetId}";
 			public const string Budgets = Base + "/user/budgets";
 
-			public const string NewBudgetPeriod = Budget + "/periods";
+			public const string CreateBudgetPeriod = Budget + "/periods";
 			public const string BudgetPeriods = Budget + "/periods";
 			public const string BudgetPeriod = Budget + "/periods/{periodId}";
 
-			public const string NewExpense = BudgetPeriod + "/expenses";
+			public const string CreateExpense = BudgetPeriod + "/expenses";
 			public const string BudgetPeriodExpenses = BudgetPeriod + "/expenses";
 			public const string BudgetPeriodExpense = BudgetPeriod + "/expenses/{expenseId}";
 			public const string UpdateExpense = BudgetPeriod + "/expenses/{expenseId}";
 			public const string DeleteExpense = BudgetPeriod + "/expenses/{expenseId}";
 
-			public const string NewIncome = BudgetPeriod + "/incomes";
+			public const string CreateIncome = BudgetPeriod + "/incomes";
 			public const string BudgetPeriodIncomes = BudgetPeriod + "/incomes";
 			public const string BudgetPeriodIncome = BudgetPeriod + "/incomes/{incomeId}";
 			public const string UpdateIncome = BudgetPeriod + "/incomes/{incomeId}";
 			public const string DeleteIncome = BudgetPeriod + "/incomes/{incomeId}";
 
-			public const string NewDebt = Budget + "/debts";
+			public const string CreateDebt = Budget + "/debts";
 			public const string BudgetDebts = Budget + "/debts";
 			public const string BudgetDebt = Budget + "/debts/{debtId}";
 			public const string UpdateBudgetDebt = Budget + "/debts/{debtId}";

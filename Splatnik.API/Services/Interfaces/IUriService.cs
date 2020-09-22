@@ -12,5 +12,6 @@ namespace Splatnik.API.Services.Interfaces
 		Uri GetConfirmationLink(string email, string token);
 		Uri GetExpenseUri(int budgetId, int periodId, int expenseId);
         Uri GetIncomeUri(int budgetId, int periodId, int incomeId);
+        Uri GetDebtUri(int budgetId, int debtId);
     }
 }

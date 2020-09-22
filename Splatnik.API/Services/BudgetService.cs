@@ -24,7 +24,7 @@ namespace Splatnik.API.Services
 
 		}
 
-
+        #region Budgets
         public async Task<Budget> NewBudgetAsync(BudgetRequest budgetRequest, string userId)
 		{
 
@@ -53,9 +53,10 @@ namespace Splatnik.API.Services
 		{
 			return await _budgetRepository.GetUserBudgets(userId);
 		}
+        #endregion
 
-
-		public async Task<Period> NewPeriodAsync(PeriodRequest periodRequest, int budgetId)
+        #region Periods
+        public async Task<Period> NewPeriodAsync(PeriodRequest periodRequest, int budgetId)
         {
 			var periodDto = new PeriodDto
 			{
@@ -89,9 +90,10 @@ namespace Splatnik.API.Services
         {
 			return await _budgetRepository.GetBudgetPeriodsAsync(budgetId);
         }
+        #endregion
 
-        
-		public async Task<Expense> NewExpenseAsync(int periodId, ExpenseRequest request)
+        #region Expenses
+        public async Task<Expense> NewExpenseAsync(int periodId, ExpenseRequest request)
         {
 			var expenseDto = new ExpenseDto
 			{
@@ -143,8 +145,9 @@ namespace Splatnik.API.Services
         {
 			return await _budgetRepository.DeleteExepenseAsync(expense);
         }
+        #endregion
 
-
+        #region Incomes
         public async Task<Income> NewIncomeAsync(int periodID, IncomeRequest request)
         {
 			var incomeDto = new IncomeDto
@@ -197,8 +200,50 @@ namespace Splatnik.API.Services
         {
 			return await _budgetRepository.DeleteIncomeAsync(income);
         }
+		#endregion
+
+		#region Debts
+		public async Task<Debt> NewDebtAsync(DebtRequest request, int budgetId)
+		{
+			var debtDto = new DebtDto
+			{
+				CreatedAt = DateTime.UtcNow,
+				Name = request.Name,
+				Description = request.Description,
+				InitialValue = request.InitialValue,
+				CurrencyId = request.CurrencyId,
+				BudgetId = budgetId
+			};
+
+			var debt = _mapper.Map<Debt>(debtDto);
+
+			var created = await _budgetRepository.CreateDebtAsync(debt);
+
+			return created;
+		}
+
+		public async Task<Debt> GetDebtAsync(int budgetId, int debtId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public async Task<IList<Debt>> GetDebtsAsync(int budgetId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public async Task<bool> UpdateDebtAsync(int debtId, UpdateDebtRequest request)
+		{
+			throw new NotImplementedException();
+		}
+
+		public async Task<bool> DeleteDebtAsync(Debt debt)
+		{
+			throw new NotImplementedException();
+		}
 
 
+		#endregion
 
-    }
+	}
 }

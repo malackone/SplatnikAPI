@@ -153,7 +153,47 @@ namespace Splatnik.Data.Repositories
 			_dataContext.Incomes.Remove(income);
 			return (await _dataContext.SaveChangesAsync()) > 0;
 		}
-        #endregion
+		#endregion
 
-    }
+
+		#region Debts
+		public async Task<Debt> CreateDebtAsync(Debt debt)
+		{
+			_dataContext.Debts.Add(debt);
+			await _dataContext.SaveChangesAsync();
+
+			return debt;
+		}
+
+		public async Task<Debt> GetDebtAsync(int budgetId, int debtId)
+		{
+			return await _dataContext.Debts.FirstOrDefaultAsync(x => x.Id == debtId && x.BudgetId == budgetId);
+		}
+
+		public async Task<IList<Debt>> GetDebtsAsync(int budgetId)
+		{
+			return await _dataContext.Debts.Where(x => x.BudgetId == budgetId).ToListAsync();
+		}
+
+		public async Task<bool> UpdateDebtAsync(Debt debt)
+		{
+			var currentDebt = await _dataContext.Debts.FirstOrDefaultAsync(x => x.Id == debt.Id);
+
+			currentDebt.Name = debt.Name;
+			currentDebt.Description = debt.Name;
+			currentDebt.InitialValue = debt.InitialValue;
+
+			_dataContext.Update(debt);
+
+			return (await _dataContext.SaveChangesAsync()) > 0;
+
+		}
+
+		public async Task<bool> DeleteDebtAsync(Debt debt)
+		{
+			_dataContext.Remove(debt);
+			return (await _dataContext.SaveChangesAsync()) > 0;
+		}
+		#endregion
+	}
 }
