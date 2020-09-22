@@ -3,21 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
+using Splatnik.Data.Domain;
 
 namespace Splatnik.Data.Database.DbModels
 {
-	public class Budget
+	public class Budget : BaseEntity
 	{
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
-
-		[Required]
-		public DateTime CreatedAt { get; set; }
-
-		[Required]
-		public DateTime UpdatedAt { get; set; }
-
 		[Required]
 		[MaxLength(50)]
 		public string Name { get; set; }

@@ -10,18 +10,19 @@ using System.Threading.Tasks;
 
 namespace Splatnik.Data.Repositories
 {
-    public class BudgetRepository : IBudgetRepository
+    public class IncomeRepository : IIncomeRepository
     {
         private readonly DataContext _dataContext;
-        public BudgetRepository(DataContext dataContext)
+
+        public IncomeRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
 
-
-        public async Task<IList<Budget>> GetUserBudgets(string userId)
+        public async Task<IList<Income>> GetIncomesForPeriodAsync(int periodId)
         {
-            return await _dataContext.Budgets.Where(x => x.UserId == userId).ToListAsync();
+            return await _dataContext.Incomes.Where(x => x.PeriodId == periodId).ToListAsync();
         }
+
     }
 }

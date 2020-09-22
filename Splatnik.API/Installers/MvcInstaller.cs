@@ -30,12 +30,26 @@ namespace Splatnik.API.Installers
 			services.AddSingleton(jwtSettings);
 			services.AddSingleton(sendGridSettings);
 
-			services.AddScoped<IAdminService, AdminService>();
-			services.AddScoped<IIdentityService, IdentityService>();
 			services.AddScoped<IIdentityRepository, IdentityRepository>();
-			services.AddScoped<IBudgetService, BudgetService>();
-			services.AddScoped<IBudgetRepository, BudgetRepository>();
+			services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IBudgetRepository, BudgetRepository>();
+            services.AddScoped<IDebtRepository, DebtRepository>();
+            services.AddScoped<IPeriodRepository, PeriodRepository>();
+            services.AddScoped<IIncomeRepository, IncomeRepository>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            services.AddScoped<IDebtPaymentRepository, DebtPaymentRepository>();
+            services.AddScoped<ICreditRepository, CreditRepository>();
+
+			services.AddScoped<IAdminService, AdminService>();
 			services.AddScoped<IEmailService, EmailSender>();
+			services.AddScoped<IIdentityService, IdentityService>();
+			services.AddScoped<IBudgetService, BudgetService>();
+			services.AddScoped<IDebtService, DebtService>();
+			services.AddScoped<IExpenseService, ExpenseService>();
+			services.AddScoped<IIncomeService, IncomeService>();
+			services.AddScoped<IPeriodService, PeriodService>();
+			services.AddScoped<ICreditService, CreditService>();
+			//services.AddScoped<IDebtPaymentService, DebtPaymentService>();
 
 			services.AddControllers();
 

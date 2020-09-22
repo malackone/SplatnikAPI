@@ -55,11 +55,31 @@ namespace Splatnik.Contracts.V1
 			public const string BudgetDebt = Budget + "/debts/{debtId}";
 			public const string UpdateBudgetDebt = Budget + "/debts/{debtId}";
 			public const string DeleteBudgetDebt = Budget + "/debts/{debtId}";
-		}
 
-		public static class UserSetting
+			public const string CreateDebtPayment = BudgetDebt + "/debtpayments";
+			public const string BudgetDebtPayments = BudgetDebt + "/debtpayments";
+			public const string BudgetDebtPayment = BudgetDebt + "/debtpayments/{debtPeymentId}";
+			public const string UpdateBudgetDebtPayment = BudgetDebt + "/debtpayments/{debtPeymentId}";
+			public const string DeleteBudgetDebtPayment = BudgetDebt + "/debtpayments/{debtPeymentId}";
+
+			public const string CreateCredit = Budget + "/credits";
+			public const string BudgetCredits = Budget + "/credits";
+			public const string BudgetCredit = Budget + "/credits/{creditId}";
+			public const string UpdateBudgetCredit = Budget + "/credits/{creditId}";
+			public const string DeleteBudgetCredit = Budget + "/credits/{creditId}";
+
+			public const string CreateCreditPayment = BudgetCredit + "/creditpayments";
+			public const string BudgetCreditPayments = BudgetCredit + "/creditpayments";
+			public const string BudgetCreditPayment = BudgetCredit + "/creditpayments/{creditPeymentId}";
+			public const string UpdateBudgetCreditPayment = BudgetCredit + "/creditpayments/{creditPeymentId}";
+			public const string DeleteBudgetCreditPayment = BudgetCredit + "/creditpayments/{creditPeymentId}";
+
+
+		}
+	}
+
+		public static class UserSettings
         {
 
         }
-	}
 }

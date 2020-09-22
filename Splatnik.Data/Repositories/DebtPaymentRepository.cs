@@ -1,27 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Splatnik.Data.Database;
+﻿using Splatnik.Data.Database;
 using Splatnik.Data.Database.DbModels;
 using Splatnik.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Splatnik.Data.Repositories
 {
-    public class BudgetRepository : IBudgetRepository
+    public class DebtPaymentRepository : IDebtPaymentRepository
     {
         private readonly DataContext _dataContext;
-        public BudgetRepository(DataContext dataContext)
+
+        public DebtPaymentRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
 
-
-        public async Task<IList<Budget>> GetUserBudgets(string userId)
+        public Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtID)
         {
-            return await _dataContext.Budgets.Where(x => x.UserId == userId).ToListAsync();
+            throw new NotImplementedException();
         }
+
     }
 }

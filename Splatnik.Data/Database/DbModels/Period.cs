@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Splatnik.Data.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,15 +7,8 @@ using System.Text;
 
 namespace Splatnik.Data.Database.DbModels
 {
-	public class Period
+	public class Period : BaseEntity
 	{
-		[Key]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
-
-		[Required]
-		public DateTime CreatedAt { get; set; }
-
 		[Required]
 		public DateTime FirstDay { get; set; }
 

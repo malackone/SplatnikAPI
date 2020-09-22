@@ -14,11 +14,16 @@ namespace Splatnik.API.AutoMapper
 		{
 			CreateMap<BudgetDto, Budget>();
 			CreateMap<PeriodDto, Period>();
+
 			CreateMap<ExpenseDto, Expense>();
+			CreateMap<UpdateExpenseDto, Income>();
+			
 			CreateMap<IncomeDto, Income>();
 			CreateMap<UpdateIncomeDto, Income>();
-			CreateMap<UpdateExpenseDto, Income>();
+			
 			CreateMap<DebtDto, Debt>();
+			CreateMap<UpdateDebtDto, Debt>();
+			
 			CreateMap<DebtPaymentDto, DebtPayment>();
 		}
 	}

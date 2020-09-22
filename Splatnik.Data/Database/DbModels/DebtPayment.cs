@@ -1,18 +1,12 @@
-﻿using System;
+﻿using Splatnik.Data.Domain;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Splatnik.Data.Database.DbModels
 {
-    public class DebtPayment
+    public class DebtPayment : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        [Required]
-        public DateTime CreatedAt { get; set; }
-
         [MaxLength(200)]
         public string Description { get; set; }
 
