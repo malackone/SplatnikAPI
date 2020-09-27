@@ -13,5 +13,6 @@ namespace Splatnik.API.Services.Interfaces
 		Uri GetExpenseUri(int budgetId, int periodId, int expenseId);
         Uri GetIncomeUri(int budgetId, int periodId, int incomeId);
         Uri GetDebtUri(int budgetId, int debtId);
+        Uri GetDebtPaymentUri(int budgetId, int debtPaymentId);
     }
 }

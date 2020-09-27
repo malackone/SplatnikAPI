@@ -27,7 +27,7 @@ namespace Splatnik.Data.Database.DbModels
         public Debt Debt { get; set; }
 
         [Required]
-        public int PeriodId { get; set; }
+        public int? PeriodId { get; set; }
 
         [ForeignKey(nameof(PeriodId))]
         public Period Period { get; set; }

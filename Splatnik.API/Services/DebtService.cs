@@ -28,7 +28,6 @@ namespace Splatnik.API.Services
 		{
 			var debtDto = new DebtDto
 			{
-				CreatedAt = DateTime.UtcNow,
 				Name = request.Name,
 				Description = request.Description,
 				InitialValue = request.InitialValue,

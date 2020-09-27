@@ -10,6 +10,7 @@ using Splatnik.API.Services.Interfaces;
 using Splatnik.Contracts.V1;
 using Splatnik.Contracts.V1.Requests;
 using Splatnik.Contracts.V1.Responses;
+using System.Runtime.CompilerServices;
 
 namespace Splatnik.API.Controllers.V1
 {
@@ -24,10 +25,11 @@ namespace Splatnik.API.Controllers.V1
 		private readonly IIncomeService _incomeService;
 		private readonly IExpenseService _expenseService;
 		private readonly IDebtService _debtService;
+		private readonly IDebtPaymentService _debtPaymentService;
 		private readonly ICreditService _creditService;
 		
 		public UserBudgetController(IMapper mapper, IUriService uriService, IIdentityService identityService, IBudgetService budgetService, IPeriodService periodService, IIncomeService incomeService, 
-			IExpenseService expenseService, IDebtService debtService, ICreditService creditService)
+			IExpenseService expenseService, IDebtService debtService, IDebtPaymentService debtPaymentService, ICreditService creditService)
 		{
 			_mapper = mapper;
 			_identityService = identityService;
@@ -37,6 +39,7 @@ namespace Splatnik.API.Controllers.V1
 			_incomeService = incomeService;
 			_expenseService = expenseService;
 			_debtService = debtService;
+			_debtPaymentService = debtPaymentService;
 			_creditService = creditService;
 		}
 
@@ -501,7 +504,7 @@ namespace Splatnik.API.Controllers.V1
 				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no income with id: {incomeId} for period id: {periodId}" }));
 			}
 
-			var updateIncome = await _incomeService.UpdateIncomeAsync(periodId, request);
+			var updateIncome = await _incomeService.UpdateIncomeAsync(incomeId, request);
 
             if (!updateIncome)
             {
@@ -744,6 +747,195 @@ namespace Splatnik.API.Controllers.V1
 
 			return NoContent();
 		}
-		#endregion
-	}
+        #endregion
+
+        #region DebtPayments
+		[HttpPost(ApiRoutes.UserBudget.CreateDebtPayment)]
+		public async Task<IActionResult> CreateDebtPayment([FromRoute] int budgetId, [FromBody] DebtPaymentRequest request)
+        {
+			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
+
+			// check if user exists
+			var userExists = await _identityService.CheckIfUserExists(userId);
+			if (!userExists)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
+			}
+
+			// check if new debt budgetId is correct
+			var budget = await _budgetService.GetBudgetAsync(budgetId);
+			if (budget == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no budget with id: {budgetId}" }));
+			}
+
+			if (budget.UserId != userId)
+			{
+				return Forbid();
+			}
+
+			// create debtPayment
+			var newDebtPayment = _debtPaymentService.NewDebtPaymentAsync(request, budgetId);
+
+			if (newDebtPayment == null)
+			{
+				return BadRequest(new ErrorResponse(new ErrorModel { Message = "Could not create new debt payment" }));
+			}
+
+			var locationUri = _uriService.GetDebtPaymentUri(budgetId, newDebtPayment.Id);
+
+			return Created(locationUri, new Response<DebtPaymentResponse>(_mapper.Map<DebtPaymentResponse>(newDebtPayment)));
+		}
+
+
+		[HttpGet(ApiRoutes.UserBudget.BudgetDebtPayment)]
+		public async Task<IActionResult> GetDebtPayment([FromRoute] int budgetId, int debtId, int debtPaymentId)
+        {
+			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
+
+			// check if user exists
+			var userExists = await _identityService.CheckIfUserExists(userId);
+			if (!userExists)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
+			}
+
+			var budget = await _budgetService.GetBudgetAsync(budgetId);
+			if (budget == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no budget with id: {budgetId}" }));
+			}
+
+			if (budget.UserId != userId)
+			{
+				return Forbid();
+			}
+
+			var debtPayment = await _debtPaymentService.GetDebtPaymentAsync(debtPaymentId);
+
+			if (debtPayment == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no debtPayment with id: {debtPaymentId} in Debt with id: {debtId}" }));
+			}
+
+			return Ok(new Response<DebtPaymentResponse>(_mapper.Map<DebtPaymentResponse>(debtPayment)));
+
+		}
+
+
+		[HttpGet(ApiRoutes.UserBudget.BudgetDebtPayments)]
+		public async Task<IActionResult> GetDebtPayments([FromRoute] int budgetId, int debtId)
+        {
+			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
+
+			// check if user exists
+			var userExists = await _identityService.CheckIfUserExists(userId);
+			if (!userExists)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
+			}
+
+			var budget = await _budgetService.GetBudgetAsync(budgetId);
+			if (budget == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no budget with id: {budgetId}" }));
+			}
+
+			if (budget.UserId != userId)
+			{
+				return Forbid();
+			}
+
+			var debtPayments = await _debtPaymentService.GetDebtPaymentsAsync(debtId);
+
+			if (debtPayments == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no debt payments in Debt with id: {debtId}" }));
+			}
+
+			return Ok(new Response<IList<DebtPaymentResponse>>(_mapper.Map<IList<DebtPaymentResponse>>(debtPayments)));
+		}
+
+
+		[HttpPatch(ApiRoutes.UserBudget.UpdateBudgetDebtPayment)]
+		public async Task<IActionResult> UpdateDebtPayment([FromRoute] int budgetId, int debtId, int debtPaymentId, [FromBody] UpdateDebtPaymentRequest request)
+        {
+			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
+
+			// check if user exists
+			var userExists = await _identityService.CheckIfUserExists(userId);
+			if (!userExists)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
+			}
+
+			var budget = await _budgetService.GetBudgetAsync(budgetId);
+			if (budget == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no budget with id: {budgetId}" }));
+			}
+
+			if (budget.UserId != userId)
+			{
+				return Forbid();
+			}
+
+			var debtPaymentInDb = await _debtPaymentService.GetDebtPaymentAsync(debtPaymentId);
+			if (debtPaymentInDb == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no debtPayment with id: {debtPaymentId} for debt id: {debtId}" }));
+			}
+
+			var updateDebt = await _debtPaymentService.UpdateDebtPaymentAsync(debtPaymentId, request);
+			if (!updateDebt)
+			{
+				return BadRequest(new ErrorResponse(new ErrorModel { Message = $"Could not update debt payment with id:{debtPaymentId}" }));
+			}
+
+			var updatedDebtPayment = await _debtPaymentService.GetDebtPaymentAsync(debtPaymentId);
+			return Ok(new Response<DebtPaymentResponse>(_mapper.Map<DebtPaymentResponse>(updatedDebtPayment)));
+		}
+
+
+		[HttpDelete(ApiRoutes.UserBudget.DeleteBudgetDebtPayment)]
+		public async Task<IActionResult> DeleteDebtPayment([FromRoute] int budgetId, int debtId, int debtPaymentId)
+        {
+			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
+
+			// check if user exists
+			var userExists = await _identityService.CheckIfUserExists(userId);
+			if (!userExists)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
+			}
+
+			var budget = await _budgetService.GetBudgetAsync(budgetId);
+			if (budget == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no budget with id: {budgetId}" }));
+			}
+
+			if (budget.UserId != userId)
+			{
+				return Forbid();
+			}
+
+			var debtPaymentInDb = await _debtPaymentService.GetDebtPaymentAsync(debtPaymentId);
+			if (debtPaymentInDb == null)
+			{
+				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is not debt payment with id:{debtPaymentId}" }));
+			}
+
+
+			var deleteDebtPayment = await _debtPaymentService.DeleteDebtPaymentAsync(debtPaymentInDb);
+			if (!deleteDebtPayment)
+			{
+				return BadRequest(new ErrorResponse(new ErrorModel { Message = $"Could not delete debt payment with id:{debtPaymentId}" }));
+			}
+
+			return NoContent();
+		}
+
+        #endregion
+    }
 }

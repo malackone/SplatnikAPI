@@ -49,7 +49,7 @@ namespace Splatnik.API.Installers
 			services.AddScoped<IIncomeService, IncomeService>();
 			services.AddScoped<IPeriodService, PeriodService>();
 			services.AddScoped<ICreditService, CreditService>();
-			//services.AddScoped<IDebtPaymentService, DebtPaymentService>();
+			services.AddScoped<IDebtPaymentService, DebtPaymentService>();
 
 			services.AddControllers();
 

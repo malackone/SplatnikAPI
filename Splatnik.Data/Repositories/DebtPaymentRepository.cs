@@ -1,8 +1,10 @@
-﻿using Splatnik.Data.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using Splatnik.Data.Database;
 using Splatnik.Data.Database.DbModels;
 using Splatnik.Data.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,9 +19,9 @@ namespace Splatnik.Data.Repositories
             _dataContext = dataContext;
         }
 
-        public Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtID)
+        public async Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId)
         {
-            throw new NotImplementedException();
+            return await _dataContext.DebtPayments.Where(x => x.DebtId == debtId).ToListAsync();
         }
 
     }

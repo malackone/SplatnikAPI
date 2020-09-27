@@ -13,7 +13,7 @@ namespace Splatnik.API
 	{
 		public IConfiguration Configuration { get; }
 
-		public Startup(IConfiguration configuration, IWebHostEnvironment env)
+		public Startup(IWebHostEnvironment env)
 		{
 			var builder = new ConfigurationBuilder()
 								.SetBasePath(env.ContentRootPath)
