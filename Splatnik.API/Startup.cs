@@ -1,18 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using Splatnik.Data.Database;
+using Splatnik.API.Installers;
+using Splatnik.API.Settings;
 
 namespace Splatnik.API
 {
@@ -20,7 +13,7 @@ namespace Splatnik.API
 	{
 		public IConfiguration Configuration { get; }
 
-		public Startup(IConfiguration configuration, IWebHostEnvironment env)
+		public Startup(IWebHostEnvironment env)
 		{
 			var builder = new ConfigurationBuilder()
 								.SetBasePath(env.ContentRootPath)
@@ -33,21 +26,8 @@ namespace Splatnik.API
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllers();
-
-			services.AddSwaggerGen(s => 
-			{
-				s.SwaggerDoc("v1", new OpenApiInfo 
-				{ 
-					Version="v1", 
-					Title = "Splatnik API",
-					Description = "API dla projektu splatnik"
-				});
-			});
-
-			services.AddDbContext<DataContext>(options =>
-				options.UseSqlServer(
-					Configuration.GetConnectionString("SqlServer")));
+			services.InstallServiceInAssembly(Configuration);
+			services.AddAutoMapper(typeof(Startup));
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -57,16 +37,27 @@ namespace Splatnik.API
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseSwagger();
+
+			var swaggerOptions = new SwaggerSettings();
+			Configuration.GetSection(nameof(SwaggerSettings)).Bind(swaggerOptions);
+
+			app.UseSwagger(option => { option.RouteTemplate = swaggerOptions.JsonRoute; });
 			app.UseSwaggerUI(c =>
 			{
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Splatnik API v1");
+				c.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
 			});
+
+
+
 
 			app.UseHttpsRedirection();
 
+			app.UseStaticFiles();
+
+
 			app.UseRouting();
 
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>

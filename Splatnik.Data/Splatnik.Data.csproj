@@ -5,15 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Database\Migrations\20200827212926_BasicApplicationModel.cs" />
+    <Compile Remove="Database\Migrations\20200827212926_BasicApplicationModel.Designer.cs" />
+    <Compile Remove="Database\Migrations\20200827213221_ModelUpdate.cs" />
+    <Compile Remove="Database\Migrations\20200827213221_ModelUpdate.Designer.cs" />
+    <Compile Remove="Database\Migrations\20200921160911_DebtAndDebtPaymentModel.cs" />
+    <Compile Remove="Database\Migrations\20200921160911_DebtAndDebtPaymentModel.Designer.cs" />
+    <Compile Remove="Database\Migrations\20200921161111_DebtAndDebtPaymentModel.cs" />
+    <Compile Remove="Database\Migrations\20200921161111_DebtAndDebtPaymentModel.Designer.cs" />
+    <Compile Remove="Database\Migrations\20200921163025_DebtAndDebtPaymentModel.cs" />
+    <Compile Remove="Database\Migrations\20200921163025_DebtAndDebtPaymentModel.Designer.cs" />
+    <Compile Remove="Database\Migrations\20200921181114_CreditAndCreditPaymentModel.cs" />
+    <Compile Remove="Database\Migrations\20200921181114_CreditAndCreditPaymentModel.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Splatnik.Contracts\Splatnik.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\DbModels\" />
-    <Folder Include="Repositories\Interfaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>
@@ -24,6 +36,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.7" />
   </ItemGroup>
 
 </Project>
