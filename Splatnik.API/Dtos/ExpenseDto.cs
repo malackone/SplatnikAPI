@@ -7,7 +7,8 @@ namespace Splatnik.API.Dtos
 {
     public class ExpenseDto
     {
-		public DateTime CreatedAt { get; set; }
+        public string UserId { get; set; }
+        public DateTime CreatedAt { get; set; }
 		public DateTime IncomeDate { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }

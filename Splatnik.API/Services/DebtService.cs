@@ -24,15 +24,17 @@ namespace Splatnik.API.Services
 			_debtRepository = debtRepository;
 		}
 
-		public async Task<Debt> NewDebtAsync(DebtRequest request, int budgetId)
+		public async Task<Debt> NewDebtAsync(DebtRequest request, string userId)
 		{
 			var debtDto = new DebtDto
 			{
+				UserId = userId,
+				CreatedAt = DateTime.UtcNow,
 				Name = request.Name,
 				Description = request.Description,
 				InitialValue = request.InitialValue,
 				CurrencyId = request.CurrencyId,
-				BudgetId = budgetId
+				BudgetId = request.BudgetId
 			};
 
 			var debt = _mapper.Map<Debt>(debtDto);
@@ -42,14 +44,14 @@ namespace Splatnik.API.Services
 			return created;
 		}
 
-		public async Task<Debt> GetDebtAsync(int budgetId, int debtId)
+		public async Task<Debt> GetDebtAsync(int debtId)
 		{
 			return await _baseRepository.GetEntityAsync(debtId);
 		}
 
-		public async Task<IList<Debt>> GetDebtsAsync(int budgetId)
+		public async Task<IList<Debt>> GetDebtsByUserIdAsync(string userId)
 		{
-			return await _debtRepository.GetDebtsForBudgetAsync(budgetId);
+			return await _debtRepository.GetDebtsByUserIdAsync(userId);
 		}
 
 		public async Task<bool> UpdateDebtAsync(int debtId, UpdateDebtRequest request)

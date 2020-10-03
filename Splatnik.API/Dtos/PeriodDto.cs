@@ -7,6 +7,7 @@ namespace Splatnik.API.Dtos
 {
     public class PeriodDto
     {
+        public string UserId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime FirstDay { get; set; }
         public DateTime LastDay { get; set; }

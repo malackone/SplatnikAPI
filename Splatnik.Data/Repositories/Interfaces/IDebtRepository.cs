@@ -8,6 +8,6 @@ namespace Splatnik.Data.Repositories.Interfaces
 {
     public interface IDebtRepository
     {
-        Task<IList<Debt>> GetDebtsForBudgetAsync(int budgetId);
+        Task<IList<Debt>> GetDebtsByUserIdAsync(string userId);
     }
 }

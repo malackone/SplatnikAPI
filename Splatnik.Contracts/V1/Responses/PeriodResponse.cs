@@ -19,5 +19,7 @@ namespace Splatnik.Contracts.V1.Responses
 
 		public List<IncomeResponse> Incomes { get; set; }
 		public List<ExpenseResponse> Expenses { get; set; }
+		public List<DebtPaymentResponse> DebtPayments { get; set; }
+		public List<CreditPaymentResponse> CreditPayments { get; set; }
 	}
 }

@@ -9,7 +9,7 @@ namespace Splatnik.API.Services.Interfaces
 {
     public interface ICreditService
     {
-        Task<Credit> NewCreditAsync(CreditRequest request, int budgetId);
+        Task<Credit> NewCreditAsync(CreditRequest request, string userId);
         Task<Credit> GetCreditAsync(int creditId);
         Task<IList<Credit>> GetCreditsAsync(int budgetId);
         Task<bool> UpdateCreditAsync(UpdateCreditRequest request, int budgetId);

@@ -12,5 +12,6 @@ namespace Splatnik.Contracts.V1.Requests
         public decimal IncomeValue { get; set; }
         public int CurrencyId { get; set; }
         public int PeriodId { get; set; }
+
     }
 }

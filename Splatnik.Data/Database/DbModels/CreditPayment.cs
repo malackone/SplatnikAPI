@@ -7,6 +7,10 @@ namespace Splatnik.Data.Database.DbModels
 {
     public class CreditPayment : BaseEntity
     {
+        [Required]
+        [MaxLength(450)]
+        public string UserId { get; set; }
+
         public DateTime PaidAt { get; set; }
 
         [Required]

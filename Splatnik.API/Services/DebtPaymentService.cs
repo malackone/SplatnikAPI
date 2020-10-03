@@ -26,15 +26,18 @@ namespace Splatnik.API.Services
         }
 
 
-        public async Task<DebtPayment> NewDebtPaymentAsync(DebtPaymentRequest request, int periodId)
+        public async Task<DebtPayment> NewDebtPaymentAsync(DebtPaymentRequest request, int debtId, string userId)
         {
             var debtPaymentDto = new DebtPaymentDto
             {
+                UserId = userId,
                 CreatedAt = DateTime.UtcNow,
+                PaymentDate = request.PaymentDate,
                 Description = request.Description,
                 DebtPaymentValue = request.DebtPaymentValue,
                 CurrencyId = request.CurrencyId,
-                PeriodId = periodId
+                PeriodId = request.PeriodId,
+                DebtId = debtId
             };
 
             var debtPayment = _mapper.Map<DebtPayment>(debtPaymentDto);

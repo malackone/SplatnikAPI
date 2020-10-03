@@ -10,6 +10,10 @@ namespace Splatnik.Data.Database.DbModels
 	public class Expense : BaseEntity
 	{
 		[Required]
+		[MaxLength(450)]
+		public string UserId { get; set; }
+
+		[Required]
 		public DateTime IncomeDate { get; set; }
 
 		[Required]

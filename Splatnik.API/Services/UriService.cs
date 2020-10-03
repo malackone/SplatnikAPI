@@ -1,5 +1,6 @@
 ﻿using Splatnik.API.Services.Interfaces;
 using Splatnik.Contracts.V1;
+using Splatnik.Data.Database.DbModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,33 +35,28 @@ namespace Splatnik.API.Services
 			return new Uri(_baseUri + ApiRoutes.Identity.ConfirmEmail + "/" + email + "/" + token);
 		}
 
-        public Uri GetExpenseUri(int budgetId, int periodId, int expenseId)
+        public Uri GetExpenseUri(int expenseId)
         {
-			return new Uri(_baseUri + ApiRoutes.UserBudget.BudgetPeriodExpense
-				.Replace("{budgetId}", budgetId.ToString())
-				.Replace("{periodId}", periodId.ToString())
+			return new Uri(_baseUri + ApiRoutes.UserExpenses.BudgetPeriodExpense
 				.Replace("{expenseId}", expenseId.ToString()));
 		}
 
-        public Uri GetIncomeUri(int budgetId, int periodId, int incomeId)
+        public Uri GetIncomeUri(int incomeId)
         {
-			return new Uri(_baseUri + ApiRoutes.UserBudget.BudgetPeriodExpense
-				.Replace("{budgetId}", budgetId.ToString())
-				.Replace("{periodId}", periodId.ToString())
+			return new Uri(_baseUri + ApiRoutes.UserExpenses.BudgetPeriodExpense
 				.Replace("{incomeId}", incomeId.ToString()));
 		}
 
-        public Uri GetDebtUri(int budgetId, int debtId)
+        public Uri GetDebtUri(int debtId)
         {
-            return new Uri(_baseUri + ApiRoutes.UserBudget.BudgetDebt
-				.Replace("{budgetId}", budgetId.ToString())
+            return new Uri(_baseUri + ApiRoutes.UserDebts.BudgetDebt
 				.Replace("{debtId}", debtId.ToString()));
 		}
 
-        public Uri GetDebtPaymentUri(int budgetId, int debtPaymentId)
+        public Uri GetDebtPaymentUri(int debtId, int debtPaymentId)
         {
-			return new Uri(_baseUri + ApiRoutes.UserBudget.BudgetDebtPayments
-				.Replace("{budgetId}", budgetId.ToString())
+			return new Uri(_baseUri + ApiRoutes.UserDebts.BudgetDebtPayments
+				.Replace("{debtId}", debtId.ToString())
 				.Replace("{debtPaymentId}", debtPaymentId.ToString()));
 		}
     }

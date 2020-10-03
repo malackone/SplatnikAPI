@@ -10,6 +10,10 @@ namespace Splatnik.Data.Database.DbModels
     public class Debt : BaseEntity
     {
         [Required]
+        [MaxLength(450)]
+        public string UserId { get; set; }
+
+        [Required]
         [MaxLength(100)]
         public string Name { get; set; }
 

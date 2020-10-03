@@ -19,9 +19,9 @@ namespace Splatnik.Data.Repositories
             _dataContext = dataContext;
         }
 
-        public async Task<IList<Debt>> GetDebtsForBudgetAsync(int budgetId)
+        public async Task<IList<Debt>> GetDebtsByUserIdAsync(string userId)
         {
-            return await _dataContext.Debts.Where(x => x.BudgetId == budgetId).ToListAsync();
+            return await _dataContext.Debts.Where(x => x.UserId == userId).ToListAsync();
         }
 
     }

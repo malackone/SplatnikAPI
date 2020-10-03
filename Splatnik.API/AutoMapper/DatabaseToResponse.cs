@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using Splatnik.Contracts.V1.Responses;
 using Splatnik.Data.Database.DbModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Splatnik.API.AutoMapper
 {

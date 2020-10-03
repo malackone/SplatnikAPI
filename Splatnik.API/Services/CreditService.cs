@@ -25,7 +25,7 @@ namespace Splatnik.API.Services
             throw new NotImplementedException();
         }
 
-        public Task<Credit> NewCreditAsync(CreditRequest request, int budgetId)
+        public Task<Credit> NewCreditAsync(CreditRequest request, string userId)
         {
             throw new NotImplementedException();
         }

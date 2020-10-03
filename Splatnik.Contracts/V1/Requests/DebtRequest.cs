@@ -10,5 +10,6 @@ namespace Splatnik.Contracts.V1.Requests
         public string Description { get; set; }
         public decimal InitialValue { get; set; }
         public int CurrencyId { get; set; }
+        public int BudgetId { get; set; }
     }
 }

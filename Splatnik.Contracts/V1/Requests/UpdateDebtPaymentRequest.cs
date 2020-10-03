@@ -10,5 +10,6 @@ namespace Splatnik.Contracts.V1.Requests
         public decimal DebtPaymentValue { get; set; }
         public int CurrencyId { get; set; }
         public int PeriodId { get; set; }
+        public int BudgetId { get; set; }
     }
 }

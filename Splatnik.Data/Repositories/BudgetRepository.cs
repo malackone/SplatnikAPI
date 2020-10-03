@@ -21,7 +21,7 @@ namespace Splatnik.Data.Repositories
 
         public async Task<IList<Budget>> GetUserBudgets(string userId)
         {
-            return await _dataContext.Budgets.Where(x => x.UserId == userId).ToListAsync();
+            return await _dataContext.Budgets.Include(x => x.Periods).Where(x => x.UserId == userId).ToListAsync();
         }
     }
 }

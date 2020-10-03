@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net;
 using System.Text;
 
 namespace Splatnik.Contracts.V1
@@ -27,7 +28,6 @@ namespace Splatnik.Contracts.V1
 			public const string TestEmail = Base + "/admin/testEmail";
 		}
 
-
 		public static class UserBudget
 		{
 			public const string CreateBudget = Base + "/user/budgets";
@@ -37,49 +37,60 @@ namespace Splatnik.Contracts.V1
 			public const string CreateBudgetPeriod = "/user/budgets/{budgetId}/periods";
 			public const string BudgetPeriods = "/user/budgets/{budgetId}/periods";
 			public const string BudgetPeriod = "/user/budgets/{budgetId}/periods/{periodId}";
+		}
 
-			public const string CreateExpense = "/user/budgets/{budgetId}/periods/{periodId}/expenses";
-			public const string BudgetPeriodExpenses = "/user/budgets/{budgetId}/periods/{periodId}/expenses";
-			public const string BudgetPeriodExpense = "/user/budgets/{budgetId}/periods/{periodId}/expenses/{expenseId}";
-			public const string UpdateExpense = "/user/budgets/{budgetId}/periods/{periodId}/expenses/{expenseId}";
-			public const string DeleteExpense = "/user/budgets/{budgetId}/periods/{periodId}/expenses/{expenseId}";
+		public static class UserIncomes
+        {
+			public const string CreateIncome = "/user/incomes";
+			public const string BudgetPeriodIncomes = "/user/incomes";
+			public const string BudgetPeriodIncome = "/user/incomes/{incomeId}";
+			public const string UpdateIncome = "/user/incomes/{incomeId}";
+			public const string DeleteIncome = "/user/incomes/{incomeId}";
+		}
 
-			public const string CreateIncome = "/user/budgets/{budgetId}/periods/{periodId}/incomes";
-			public const string BudgetPeriodIncomes = "/user/budgets/{budgetId}/periods/{periodId}incomes";
-			public const string BudgetPeriodIncome = "/user/budgets/{budgetId}/periods/{periodId}incomes/{incomeId}";
-			public const string UpdateIncome = "/user/budgets/{budgetId}/periods/{periodId}incomes/{incomeId}";
-			public const string DeleteIncome = "/user/budgets/{budgetId}/periods/{periodId}/incomes/{incomeId}";
+		public static class UserExpenses
+        {
+			public const string CreateExpense = "/user/expenses";
+			public const string BudgetPeriodExpenses = "/user/expenses";
+			public const string BudgetPeriodExpense = "/user/expenses/{expenseId}";
+			public const string UpdateExpense = "/user/expenses/{expenseId}";
+			public const string DeleteExpense = "/user/expenses/{expenseId}";
+		}
 
-			public const string CreateDebt = "/user/budgets/{budgetId}/debts";
-			public const string BudgetDebts = "/user/budgets/{budgetId}/debts";
-			public const string BudgetDebt = "/user/budgets/{budgetId}/debts/{debtId}";
-			public const string UpdateBudgetDebt = "/user/budgets/{budgetId}/debts/{debtId}";
-			public const string DeleteBudgetDebt = "/user/budgets/{budgetId}/debts/{debtId}";
+		public static class UserCredits
+        {
+			public const string CreateCredit = "/user/credits";
+			public const string BudgetCredits = "/user/credits";
+			public const string BudgetCredit = "/user/credits/{creditId}";
+			public const string UpdateBudgetCredit = "/user/credits/{creditId}";
+			public const string DeleteBudgetCredit = "/user/credits/{creditId}";
 
-			public const string CreateDebtPayment = "/user/budgets/{budgetId}/debts/{debtId}/debtpayments";
-			public const string BudgetDebtPayments = "/user/budgets/{budgetId}/debts/{debtId}/debtpayments";
-			public const string BudgetDebtPayment = "/user/budgets/{budgetId}/debts/{debtId}/debtpayments/{debtPaymentId}";
-			public const string UpdateBudgetDebtPayment = "/user/budgets/{budgetId}/debts/{debtId}/debtpayments/{debtPaymentId}";
-			public const string DeleteBudgetDebtPayment = "/user/budgets/{budgetId}/debts/{debtId}/debtpayments/{debtPaymentId}";
+			public const string CreateCreditPayment = "/user/credits/{creditId}/creditpayments";
+			public const string BudgetCreditPayments = "/user/credits/{creditId}/creditpayments";
+			public const string BudgetCreditPayment = "/user/credits/{creditId}/creditpayments/{creditPaymentId}";
+			public const string UpdateBudgetCreditPayment = "/user/credits/{creditId}/creditpayments/{creditPaymentId}";
+			public const string DeleteBudgetCreditPayment = "/user/credits/{creditId}/creditpayments/{creditPaymentId}";
+		}
 
-			public const string CreateCredit = "/user/budgets/{budgetId}/credits";
-			public const string BudgetCredits = "/user/budgets/{budgetId}/credits";
-			public const string BudgetCredit = "/user/budgets/{budgetId}credits/{creditId}";
-			public const string UpdateBudgetCredit = "/user/budgets/{budgetId}/credits/{creditId}";
-			public const string DeleteBudgetCredit = "/user/budgets/{budgetId}credits/{creditId}";
+		public static class UserDebts
+        {
+			public const string CreateDebt = "/user/debts";
+			public const string BudgetDebts = "/user/debts";
+			public const string BudgetDebt = "/user/debts/{debtId}";
+			public const string UpdateBudgetDebt = "/user/debts/{debtId}";
+			public const string DeleteBudgetDebt = "/user/debts/{debtId}";
 
-			public const string CreateCreditPayment = "/user/budgets/{budgetId}credits/{creditId}/creditpayments";
-			public const string BudgetCreditPayments = "/user/budgets/{budgetId}credits/{creditId}/creditpayments";
-			public const string BudgetCreditPayment = "/user/budgets/{budgetId}credits/{creditId}/creditpayments/{creditPaymentId}";
-			public const string UpdateBudgetCreditPayment = "/user/budgets/{budgetId}credits/{creditId}/creditpayments/{creditPaymentId}";
-			public const string DeleteBudgetCreditPayment = "/user/budgets/{budgetId}credits/{creditId}/creditpayments/{creditPaymentId}";
+			public const string CreateDebtPayment = "/user/debts/{debtId}/debtpayments";
+			public const string BudgetDebtPayments = "/user/debts/{debtId}/debtpayments";
+			public const string BudgetDebtPayment = "/user/{debtId}/debtpayments/{debtPaymentId}";
+			public const string UpdateBudgetDebtPayment = "/user/debts/{debtId}/debtpayments/{debtPaymentId}";
+			public const string DeleteBudgetDebtPayment = "/user/debts/{debtId}/debtpayments/{debtPaymentId}";
+		}
 
+		public static class UserSettings
+		{
 
 		}
 	}
 
-		public static class UserSettings
-        {
-
-        }
 }

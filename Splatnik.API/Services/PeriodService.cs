@@ -25,16 +25,17 @@ namespace Splatnik.API.Services
         }
 
 
-		public async Task<Period> NewPeriodAsync(PeriodRequest periodRequest, int budgetId)
+		public async Task<Period> NewPeriodAsync(PeriodRequest periodRequest, string userId)
 		{
 			var periodDto = new PeriodDto
 			{
+				UserId = userId,
 				CreatedAt = DateTime.UtcNow,
 				DisplayName = periodRequest.DisplayName,
 				FirstDay = periodRequest.FirstDay,
 				LastDay = periodRequest.LastDay,
 				Notes = periodRequest.Notes,
-				BudgetId = budgetId
+				BudgetId = periodRequest.BudgetId
 			};
 
 			var period = _mapper.Map<Period>(periodDto);
@@ -45,7 +46,7 @@ namespace Splatnik.API.Services
 
 		}
 
-		public async Task<Period> GetPeriodAsync(int budgetId, int periodId)
+		public async Task<Period> GetPeriodAsync(int periodId)
 		{
 			return await _baseRepository.GetEntityAsync(periodId);
 		}

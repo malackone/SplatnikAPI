@@ -24,17 +24,18 @@ namespace Splatnik.API.Services
 			_incomeRepository = incomeRepository;
 		}
 
-		public async Task<Income> NewIncomeAsync(int periodID, IncomeRequest request)
+		public async Task<Income> NewIncomeAsync(IncomeRequest request, string userId)
 		{
 			var incomeDto = new IncomeDto
 			{
+				UserId = userId,
 				CreatedAt = DateTime.UtcNow,
 				IncomeDate = request.IncomeDate,
 				Name = request.Name,
 				Description = request.Description,
 				IncomeValue = request.IncomeValue,
 				CurrencyId = request.CurrencyId,
-				PeriodId = periodID
+				PeriodId = request.PeriodId
 			};
 
 			var income = _mapper.Map<Income>(incomeDto);
@@ -44,7 +45,7 @@ namespace Splatnik.API.Services
 			return created;
 		}
 
-		public async Task<Income> GetIncomeAsync(int periodId, int incomeId)
+		public async Task<Income> GetIncomeAsync(int incomeId)
 		{
 			return await _baseRepository.GetEntityAsync(incomeId);
 		}

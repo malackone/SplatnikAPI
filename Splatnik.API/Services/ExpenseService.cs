@@ -24,17 +24,18 @@ namespace Splatnik.API.Services
 			_mapper = mapper;
 		}
 
-		public async Task<Expense> NewExpenseAsync(int periodId, ExpenseRequest request)
+		public async Task<Expense> NewExpenseAsync(ExpenseRequest request, string userId)
 		{
 			var expenseDto = new ExpenseDto
 			{
+				UserId = userId,
 				CreatedAt = DateTime.UtcNow,
 				IncomeDate = request.IncomeDate,
 				Name = request.Name,
 				Description = request.Description,
 				ExpenseValue = request.ExpenseValue,
 				CurrencyId = request.CurrencyId,
-				PeriodId = periodId
+				PeriodId = request.PeriodId
 			};
 
 			var expense = _mapper.Map<Expense>(expenseDto);
@@ -44,7 +45,7 @@ namespace Splatnik.API.Services
 			return created;
 		}
 
-		public async Task<Expense> GetExpenseAsync(int periodId, int expenseId)
+		public async Task<Expense> GetExpenseAsync(int expenseId)
 		{
 			return await _baseRepository.GetEntityAsync(expenseId);
 		}
