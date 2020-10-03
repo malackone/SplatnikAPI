@@ -14,7 +14,7 @@ namespace Splatnik.Data.Database.DbModels
 		public string UserId { get; set; }
 
 		[Required]
-		public DateTime IncomeDate { get; set; }
+		public DateTime ExpenseDate { get; set; }
 
 		[Required]
 		[MaxLength(100)]

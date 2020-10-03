@@ -8,7 +8,7 @@ namespace Splatnik.Contracts.V1.Responses
 
 		public DateTime CreatedAt { get; set; }
 
-		public DateTime IncomeDate { get; set; }
+		public DateTime ExpenseDate { get; set; }
 
 		public string Name { get; set; }
 

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Splatnik.Contracts.V1.Requests
+namespace Splatnik.API.Dtos
 {
-    public class UpdateCreditRequest
+    public class CreditDto
     {
+        public DateTime CreatedAt { get; set; }
+
+        public string UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string BankName { get; set; }
@@ -15,5 +19,6 @@ namespace Splatnik.Contracts.V1.Requests
         public decimal InitialCreditValue { get; set; }
         public int CurrencyId { get; set; }
         public int BudgetId { get; set; }
+        //public virtual List<CreditPayment> CreditPayments { get; set; }
     }
 }

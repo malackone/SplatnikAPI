@@ -26,6 +26,12 @@ namespace Splatnik.API.AutoMapper
 			
 			CreateMap<DebtPaymentDto, DebtPayment>();
 			CreateMap<UpdateDebtPaymentDto, DebtPayment>();
+
+			CreateMap<CreditDto, Credit>();
+			CreateMap<UpdateCreditDto, Credit>();
+
+			CreateMap<CreditPaymentDto, CreditPayment>();
+			CreateMap<UpdateCreditPaymentDto, CreditPayment>();
 		}
 	}
 }

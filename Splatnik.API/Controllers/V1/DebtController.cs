@@ -280,7 +280,7 @@ namespace Splatnik.API.Controllers.V1
 				return Forbid();
 			}
 
-			var debtPayments = await _debtPaymentService.GetDebtPaymentsAsync(debtId);
+			var debtPayments = await _debtPaymentService.GetDebtPaymentsAsync(debtId, userId);
 			if (debtPayments == null)
 			{
 				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no debt payments in Debt with id: {debtId}" }));

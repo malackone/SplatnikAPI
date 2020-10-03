@@ -58,6 +58,7 @@ namespace Splatnik.API.Services
 		{
 			var debtDto = new UpdateDebtDto
 			{
+				Id = debtId,
 				Name = request.Name,
 				Description = request.Description,
 				InitialValue = request.InitialValue

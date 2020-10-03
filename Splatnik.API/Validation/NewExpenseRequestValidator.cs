@@ -11,7 +11,7 @@ namespace Splatnik.API.Validation
     {
         public NewExpenseRequestValidator()
         {
-            RuleFor(x => x.IncomeDate)
+            RuleFor(x => x.ExpenseDate)
                 .NotNull()
                 .NotEmpty();
 

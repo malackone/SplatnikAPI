@@ -59,5 +59,18 @@ namespace Splatnik.API.Services
 				.Replace("{debtId}", debtId.ToString())
 				.Replace("{debtPaymentId}", debtPaymentId.ToString()));
 		}
+
+        public Uri GetCreditUri(int creditId)
+        {
+			return new Uri(_baseUri + ApiRoutes.UserCredits.BudgetCredit
+				.Replace("{creditId}", creditId.ToString()));
+		}
+
+        public Uri GetCreditPaymentUri(int creditId, int creditPaymentId)
+        {
+			return new Uri(_baseUri + ApiRoutes.UserCredits.BudgetCreditPayments
+				.Replace("{creditId}", creditId.ToString())
+				.Replace("{creditPaymentId}", creditPaymentId.ToString()));
+		}
     }
 }

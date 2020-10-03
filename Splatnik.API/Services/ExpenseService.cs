@@ -30,7 +30,7 @@ namespace Splatnik.API.Services
 			{
 				UserId = userId,
 				CreatedAt = DateTime.UtcNow,
-				IncomeDate = request.IncomeDate,
+				ExpenseDate = request.ExpenseDate,
 				Name = request.Name,
 				Description = request.Description,
 				ExpenseValue = request.ExpenseValue,
@@ -62,7 +62,7 @@ namespace Splatnik.API.Services
 				Id = expenseId,
 				Name = request.Name,
 				Description = request.Description,
-				IncomeDate = request.IncomeDate,
+				ExpenseDate = request.ExpenseDate,
 				ExpenseValue = request.ExpenseValue,
 				CurrencyId = request.CurrencyId,
 				PeriodId = request.PeriodId

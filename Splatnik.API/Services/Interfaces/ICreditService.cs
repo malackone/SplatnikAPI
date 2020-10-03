@@ -11,8 +11,9 @@ namespace Splatnik.API.Services.Interfaces
     {
         Task<Credit> NewCreditAsync(CreditRequest request, string userId);
         Task<Credit> GetCreditAsync(int creditId);
-        Task<IList<Credit>> GetCreditsAsync(int budgetId);
-        Task<bool> UpdateCreditAsync(UpdateCreditRequest request, int budgetId);
+        Task<IList<Credit>> GetUserCreditsASync(string userId);
+        Task<IList<Credit>> GetCreditsAsync(int budgetId, string userId);
+        Task<bool> UpdateCreditAsync(UpdateCreditRequest request, int creditId);
         Task<bool> DeleteCreditAsync(Credit credit);
         Task<Credit> RecalculateCreditAsync();
     }

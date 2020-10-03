@@ -12,7 +12,7 @@ namespace Splatnik.API.Services.Interfaces
     {
         Task<DebtPayment> NewDebtPaymentAsync(DebtPaymentRequest request, int debtId, string userId);
         Task<DebtPayment> GetDebtPaymentAsync(int debtPaymentId);
-        Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId);
+        Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId, string userId);
         Task<bool> UpdateDebtPaymentAsync(int debtPaymentId, UpdateDebtPaymentRequest request);
         Task<bool> DeleteDebtPaymentAsync(DebtPayment debtPayment);
 

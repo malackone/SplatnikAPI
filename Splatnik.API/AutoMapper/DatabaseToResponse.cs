@@ -14,6 +14,8 @@ namespace Splatnik.API.AutoMapper
 			CreateMap<Income, IncomeResponse>();
 			CreateMap<Debt, DebtResponse>();
 			CreateMap<DebtPayment, DebtPaymentResponse>();
+			CreateMap<Credit, CreditResponse>();
+			CreateMap<CreditPayment, CreditPaymentResponse>();
 		}
 	}
 }

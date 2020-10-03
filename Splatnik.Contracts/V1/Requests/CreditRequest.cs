@@ -13,7 +13,6 @@ namespace Splatnik.Contracts.V1.Requests
         public string ContractNumber { get; set; }
         public int InitNoOfPayments { get; set; }
         public decimal InitialCreditValue { get; set; }
-        public int PaymentDayOfMonth { get; set; }
         public int CurrencyId { get; set; }
         public int BudgetId { get; set; }
     }

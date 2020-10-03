@@ -14,7 +14,7 @@ namespace Splatnik.API.Services
 {
     public class DebtPaymentService : IDebtPaymentService
     {
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
         private readonly IBaseRepository<DebtPayment> _baseRepository;
         private readonly IDebtPaymentRepository _debtPaymentRepository;
 
@@ -50,9 +50,9 @@ namespace Splatnik.API.Services
             return await _baseRepository.GetEntityAsync(debtPaymentId);
         }
 
-        public async Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId)
+        public async Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId, string userId)
         {
-            return await _debtPaymentRepository.GetDebtPaymentsAsync(debtId);
+            return await _debtPaymentRepository.GetDebtPaymentsAsync(debtId, userId);
         }
 
         public async Task<bool> UpdateDebtPaymentAsync(int debtPaymentId, UpdateDebtPaymentRequest request)

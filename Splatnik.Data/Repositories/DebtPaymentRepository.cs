@@ -19,10 +19,14 @@ namespace Splatnik.Data.Repositories
             _dataContext = dataContext;
         }
 
-        public async Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId)
+        public async Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId, string userId)
         {
-            return await _dataContext.DebtPayments.Where(x => x.DebtId == debtId).ToListAsync();
+            return await _dataContext.DebtPayments.Where(x => x.DebtId == debtId && x.UserId == userId).ToListAsync();
         }
 
+        public async Task<IList<DebtPayment>> GetUserDebtPayments(string userId)
+        {
+            return await _dataContext.DebtPayments.Where(x => x.UserId == userId).ToListAsync();
+        }
     }
 }

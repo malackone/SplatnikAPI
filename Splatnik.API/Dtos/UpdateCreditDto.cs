@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Dtos
 {
-    public class UpdateExpenseDto
+    public class UpdateCreditDto
     {
         public int Id { get; set; }
-        public DateTime ExpenseDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public decimal ExpenseValue { get; set; }
+        public string BankName { get; set; }
+        public string BankAccountNumber { get; set; }
+        public string ContractNumber { get; set; }
+        public int InitNoOfPayments { get; set; }
+        public decimal InitialCreditValue { get; set; }
         public int CurrencyId { get; set; }
-
-        public int PeriodId { get; set; }
     }
 }

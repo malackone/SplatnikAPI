@@ -54,7 +54,5 @@ namespace Splatnik.API.Services
 		{
 			return await _budgetRepository.GetUserBudgets(userId);
 		}
-
-
 	}
 }

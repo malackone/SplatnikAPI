@@ -11,18 +11,14 @@ namespace Splatnik.Data.Database.DbModels
         [MaxLength(450)]
         public string UserId { get; set; }
 
-        public DateTime PaidAt { get; set; }
-
         [Required]
-        public DateTime PlannedDateOfPayment { get; set; }
+        public DateTime PaymentDate { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(10, 2)")]
         public decimal PaymentValue { get; set; }
 
         [Required]
-        public bool IsPaid { get; set; }
-
         public int PeriodId { get; set; }
 
         [ForeignKey(nameof(PeriodId))]

@@ -6,7 +6,7 @@ namespace Splatnik.Contracts.V1.Requests
 {
     public class UpdateExpenseRequest
     {
-        public DateTime IncomeDate { get; set; }
+        public DateTime ExpenseDate { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal ExpenseValue { get; set; }

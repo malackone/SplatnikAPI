@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Splatnik.Data.Database;
 
 namespace Splatnik.Data.Database.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201003144517_UpdateExpenseModel")]
+    partial class UpdateExpenseModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,8 +299,8 @@ namespace Splatnik.Data.Database.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<decimal>("SinglePaymentAmount")
-                        .HasColumnType("decimal(10, 2)");
+                    b.Property<int>("PaymentDayOfMonth")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -333,7 +335,10 @@ namespace Splatnik.Data.Database.Migrations
                     b.Property<int>("CurrencyId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("PaymentDate")
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("PaidAt")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("PaymentValue")
@@ -341,6 +346,9 @@ namespace Splatnik.Data.Database.Migrations
 
                     b.Property<int>("PeriodId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("PlannedDateOfPayment")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");

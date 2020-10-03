@@ -35,10 +35,11 @@ namespace Splatnik.Data.Database.DbModels
 
         [Required]
         [Column(TypeName = "decimal(10, 2)")]
-        public decimal InitialCreditValue { get; set; }
+        public decimal SinglePaymentAmount { get; set; }
 
         [Required]
-        public int PaymentDayOfMonth { get; set; }
+        [Column(TypeName = "decimal(10, 2)")]
+        public decimal InitialCreditValue { get; set; }
 
         [Required]
         public int CurrencyId { get; set; }
