@@ -12,6 +12,7 @@ namespace Splatnik.API
 	public class Startup
 	{
 		public IConfiguration Configuration { get; }
+		readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 		public Startup(IWebHostEnvironment env)
 		{
@@ -28,6 +29,17 @@ namespace Splatnik.API
 		{
 			services.InstallServiceInAssembly(Configuration);
 			services.AddAutoMapper(typeof(Startup));
+
+			services.AddCors(options =>
+			{
+				options.AddPolicy(name: MyAllowSpecificOrigins,
+								  builder =>
+								  {
+									  builder.WithOrigins("http://localhost:4200")
+												  .AllowAnyHeader()
+												  .AllowAnyMethod();
+								  });
+			});
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -56,6 +68,8 @@ namespace Splatnik.API
 
 
 			app.UseRouting();
+
+			app.UseCors(MyAllowSpecificOrigins);
 
 			app.UseAuthentication();
 			app.UseAuthorization();
