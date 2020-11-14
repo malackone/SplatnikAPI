@@ -30,6 +30,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [					
@@ -38,8 +39,9 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     RegisterComponent, 
     HomeComponent, 
     ProfileComponent
-   ],
+  ],
   imports: [
+    ComponentsModule,
     MatTableModule,
     MatSortModule,
     MatProgressBarModule,

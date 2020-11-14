@@ -13,7 +13,7 @@
         novalidate
       >
         <div class="form-group">
-          <label for="email">email</label>
+          <label for="email">Email</label>
           <input
             type="text"
             class="form-control"
@@ -69,7 +69,12 @@
       </form>
   
       <div class="alert alert-success" *ngIf="isLoggedIn">
-        Logged in as {{ roles }}.
+        Logged in as {{ username }}
       </div>
+
+      <div class="alert">
+        Don't have account? Register here!
+      </div>
+
     </div>
 </div>

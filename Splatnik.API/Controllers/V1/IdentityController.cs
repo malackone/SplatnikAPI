@@ -84,6 +84,7 @@ namespace Splatnik.API.Controllers.V1
 				});
 			}
 
+
 			return Ok(new AuthSuccesResponse
 			{
 				Token = authResponse.Token,

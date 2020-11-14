@@ -269,7 +269,7 @@ namespace Splatnik.API.Services
 				JwtId = token.Id,
 				UserId = user.Id,
 				CreationDate = DateTime.UtcNow,
-				ExpiryDate = DateTime.UtcNow.AddMonths(6)
+				ExpiryDate = DateTime.UtcNow.AddDays(7)
 			};
 
 			await _identityRepository.AddTokenAsync(refreshToken);
