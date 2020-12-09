@@ -33,17 +33,17 @@ namespace Splatnik.API.Controllers.V1
 		}
 
 
-        #region Budgets
-        [HttpPost(ApiRoutes.UserBudget.CreateBudget)]
+		#region Budgets
+		[HttpPost(ApiRoutes.UserBudget.CreateBudget)]
 		public async Task<IActionResult> CreateBudget([FromBody] BudgetRequest request)
 		{ 
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
 
 			var userExists = await _identityService.CheckIfUserExists(userId);
-            if (!userExists)
-            {
+			if (!userExists)
+			{
 				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}"}));
-            }
+			}
 
 			var budget = await _budgetService.NewBudgetAsync(request, userId);
 
@@ -64,10 +64,10 @@ namespace Splatnik.API.Controllers.V1
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
 
 			var userExists = await _identityService.CheckIfUserExists(userId);
-            if (!userExists)
-            {
+			if (!userExists)
+			{
 				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
-            }
+			}
 
 			var budget = await _budgetService.GetBudgetAsync(budgetId);
 
@@ -86,8 +86,8 @@ namespace Splatnik.API.Controllers.V1
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
 
 			var userExists = await _identityService.CheckIfUserExists(userId);
-            if (!userExists)
-            {
+			if (!userExists)
+			{
 				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no user with id: {userId}" }));
 			}
 
@@ -95,12 +95,12 @@ namespace Splatnik.API.Controllers.V1
 
 			return Ok(new Response<IEnumerable<BudgetResponse>>(_mapper.Map<IEnumerable<BudgetResponse>>(budgets)));
 		}
-        #endregion
+		#endregion
 
-        #region Periods
+		#region Periods
 		[HttpPost(ApiRoutes.UserBudget.CreateBudgetPeriod)]
 		public async Task<IActionResult> CreatePeriod([FromRoute] int budgetId, [FromBody] PeriodRequest request)
-        {
+		{
 
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
 
@@ -114,14 +114,14 @@ namespace Splatnik.API.Controllers.V1
 			// check if new period budgetId is correct
 			var budget = await _budgetService.GetBudgetAsync(budgetId);
 			if(budget == null)
-            {
+			{
 				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no budget with id: {budgetId}" }));
-            }
+			}
 
 			if(budget.UserId != userId)
-            {
+			{
 				return Forbid();
-            }
+			}
 
 
 			// Check if new period dates are between any other period dates
@@ -131,7 +131,7 @@ namespace Splatnik.API.Controllers.V1
 				return BadRequest(new ErrorResponse(new ErrorModel { FieldName = nameof(request.FirstDay), Message = "First day of new period cannot be between other period dates"}));
 			}
 			if (periodList.Any(x => x.FirstDay <= request.LastDay && x.LastDay >= request.LastDay))
-            {
+			{
 				return BadRequest(new ErrorResponse(new ErrorModel { FieldName = nameof(request.LastDay), Message = "Last day of new period cannot be between other period dates" }));
 			}
 
@@ -139,9 +139,9 @@ namespace Splatnik.API.Controllers.V1
 			var period = await _periodService.NewPeriodAsync(request, userId);
 
 			if(period == null)
-            {
+			{
 				return BadRequest(new ErrorResponse(new ErrorModel { Message = "Could not create new period"}));
-            }
+			}
 
 			var locationUri = _uriService.GetPeriodUri(budgetId, period.Id);
 
@@ -152,7 +152,7 @@ namespace Splatnik.API.Controllers.V1
 
 		[HttpGet(ApiRoutes.UserBudget.BudgetPeriod)]
 		public async Task<IActionResult> GetBudgetPeriod ([FromRoute] int budgetId, int periodId)
-        {
+		{
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
 
 			// check if user exists
@@ -176,9 +176,9 @@ namespace Splatnik.API.Controllers.V1
 			var period = await _periodService.GetPeriodAsync(periodId);
 
 			if(period == null)
-            {
+			{
 				return NotFound(new ErrorResponse(new ErrorModel { Message = $"There is no Period with id: {periodId} in Budget with id: {budgetId}" }));
-            }
+			}
 
 			return Ok(new Response<PeriodResponse>(_mapper.Map<PeriodResponse>(period)));
 		}
@@ -186,7 +186,7 @@ namespace Splatnik.API.Controllers.V1
 
 		[HttpGet(ApiRoutes.UserBudget.BudgetPeriods)]
 		public async Task<IActionResult> GetBudgetPeriods([FromRoute] int budgetId)
-        {
+		{
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;
 
 			// check if user exists
@@ -217,6 +217,6 @@ namespace Splatnik.API.Controllers.V1
 			return Ok(new Response<List<PeriodResponse>>(_mapper.Map<List<PeriodResponse>>(periods)));
 
 		}
-        #endregion
-    }
+		#endregion
+	}
 }

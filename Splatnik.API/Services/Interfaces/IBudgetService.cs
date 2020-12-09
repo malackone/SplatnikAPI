@@ -9,9 +9,9 @@ namespace Splatnik.API.Services.Interfaces
 {
 	public interface IBudgetService
 	{
-        Task<Budget> NewBudgetAsync(BudgetRequest budgetRequest, string userId);
+		Task<Budget> NewBudgetAsync(BudgetRequest budgetRequest, string userId);
 		Task<Budget> GetBudgetAsync(int budgetId);
 		Task<IList<Budget>> GetUserBudgets(string userId);
 
-    }
+	}
 }

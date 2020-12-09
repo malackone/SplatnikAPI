@@ -32,13 +32,13 @@ namespace Splatnik.API.Installers
 
 			services.AddScoped<IIdentityRepository, IdentityRepository>();
 			services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            services.AddScoped<IBudgetRepository, BudgetRepository>();
-            services.AddScoped<IDebtRepository, DebtRepository>();
-            services.AddScoped<IPeriodRepository, PeriodRepository>();
-            services.AddScoped<IIncomeRepository, IncomeRepository>();
-            services.AddScoped<IExpenseRepository, ExpenseRepository>();
-            services.AddScoped<IDebtPaymentRepository, DebtPaymentRepository>();
-            services.AddScoped<ICreditRepository, CreditRepository>();
+			services.AddScoped<IBudgetRepository, BudgetRepository>();
+			services.AddScoped<IDebtRepository, DebtRepository>();
+			services.AddScoped<IPeriodRepository, PeriodRepository>();
+			services.AddScoped<IIncomeRepository, IncomeRepository>();
+			services.AddScoped<IExpenseRepository, ExpenseRepository>();
+			services.AddScoped<IDebtPaymentRepository, DebtPaymentRepository>();
+			services.AddScoped<ICreditRepository, CreditRepository>();
 
 			services.AddScoped<IAdminService, AdminService>();
 			services.AddScoped<IEmailService, EmailSender>();

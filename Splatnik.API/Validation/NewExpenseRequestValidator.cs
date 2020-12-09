@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Validation
 {
-    public class NewExpenseRequestValidator : AbstractValidator<ExpenseRequest>
-    {
-        public NewExpenseRequestValidator()
-        {
-            RuleFor(x => x.ExpenseDate)
-                .NotNull()
-                .NotEmpty();
+	public class NewExpenseRequestValidator : AbstractValidator<ExpenseRequest>
+	{
+		public NewExpenseRequestValidator()
+		{
+			RuleFor(x => x.ExpenseDate)
+				.NotNull()
+				.NotEmpty();
 
-            RuleFor(x => x.Name)
-                .NotNull()
-                .NotEmpty()
-                .MaximumLength(100);
+			RuleFor(x => x.Name)
+				.NotNull()
+				.NotEmpty()
+				.MaximumLength(100);
 
-            RuleFor(x => x.Description)
-                .MaximumLength(200);
+			RuleFor(x => x.Description)
+				.MaximumLength(200);
 
-            RuleFor(x => x.ExpenseValue)
-                .NotEmpty()
-                .NotNull()
-                .GreaterThan(0)
-                .ScalePrecision(2, 10);
-        }
-    }
+			RuleFor(x => x.ExpenseValue)
+				.NotEmpty()
+				.NotNull()
+				.GreaterThan(0)
+				.ScalePrecision(2, 10);
+		}
+	}
 }

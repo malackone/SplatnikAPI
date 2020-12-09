@@ -174,13 +174,13 @@ namespace Splatnik.API.Services
 		}
 
 		public async Task<bool> CheckIfUserExists(string userId)
-        {
+		{
 			var user = await _identityRepository.FindUserByIdAsync(userId);
 
 			if (user == null)
 				return false;
 			return true;
-        }
+		}
 
 		public async Task<IdentityResult> ConfirmEmail(string username, string token)
 		{

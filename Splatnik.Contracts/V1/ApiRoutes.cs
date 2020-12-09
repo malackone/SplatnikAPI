@@ -40,7 +40,7 @@ namespace Splatnik.Contracts.V1
 		}
 
 		public static class UserIncomes
-        {
+		{
 			public const string CreateIncome = "/user/incomes";
 			public const string BudgetPeriodIncomes = "/user/incomes";
 			public const string BudgetPeriodIncome = "/user/incomes/{incomeId}";
@@ -49,7 +49,7 @@ namespace Splatnik.Contracts.V1
 		}
 
 		public static class UserExpenses
-        {
+		{
 			public const string CreateExpense = "/user/expenses";
 			public const string BudgetPeriodExpenses = "/user/expenses";
 			public const string BudgetPeriodExpense = "/user/expenses/{expenseId}";
@@ -58,7 +58,7 @@ namespace Splatnik.Contracts.V1
 		}
 
 		public static class UserCredits
-        {
+		{
 			public const string CreateCredit = "/user/credits";
 			public const string BudgetCredits = "/user/credits";
 			public const string BudgetCredit = "/user/credits/{creditId}";
@@ -73,7 +73,7 @@ namespace Splatnik.Contracts.V1
 		}
 
 		public static class UserDebts
-        {
+		{
 			public const string CreateDebt = "/user/debts";
 			public const string BudgetDebts = "/user/debts";
 			public const string BudgetDebt = "/user/debts/{debtId}";

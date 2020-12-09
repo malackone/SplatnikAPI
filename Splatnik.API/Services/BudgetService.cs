@@ -26,7 +26,7 @@ namespace Splatnik.API.Services
 			_budgetRepository = budgetRepository;
 		}
 
-        public async Task<Budget> NewBudgetAsync(BudgetRequest budgetRequest, string userId)
+		public async Task<Budget> NewBudgetAsync(BudgetRequest budgetRequest, string userId)
 		{
 
 			var budgetDto = new BudgetDto

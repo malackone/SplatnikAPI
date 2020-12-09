@@ -17,13 +17,13 @@ namespace Splatnik.Data.Database
 		public DbSet<Expense> Expenses { get; set; }
 		public DbSet<Currency> Currencies { get; set; }
 		public DbSet<Debt> Debts { get; set; }
-        public DbSet<DebtPayment> DebtPayments { get; set; }
+		public DbSet<DebtPayment> DebtPayments { get; set; }
 		public DbSet<Credit> Credits { get; set; }
-        public DbSet<CreditPayment> CreditPayments { get; set; }
+		public DbSet<CreditPayment> CreditPayments { get; set; }
 
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
 			base.OnModelCreating(builder);
 
 			builder.Entity<Debt>()
@@ -49,7 +49,7 @@ namespace Splatnik.Data.Database
 				.WithMany(c => c.CreditPayments)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.NoAction);
-        }
+		}
 		
-    }
+	}
 }

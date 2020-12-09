@@ -12,65 +12,65 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Services
 {
-    public class DebtPaymentService : IDebtPaymentService
-    {
-        private readonly IMapper _mapper;
-        private readonly IBaseRepository<DebtPayment> _baseRepository;
-        private readonly IDebtPaymentRepository _debtPaymentRepository;
+	public class DebtPaymentService : IDebtPaymentService
+	{
+		private readonly IMapper _mapper;
+		private readonly IBaseRepository<DebtPayment> _baseRepository;
+		private readonly IDebtPaymentRepository _debtPaymentRepository;
 
-        public DebtPaymentService(IMapper mapper, IBaseRepository<DebtPayment> baseRepository, IDebtPaymentRepository debtPaymentRepository)
-        {
-            _mapper = mapper;
-            _baseRepository = baseRepository;
-            _debtPaymentRepository = debtPaymentRepository;
-        }
+		public DebtPaymentService(IMapper mapper, IBaseRepository<DebtPayment> baseRepository, IDebtPaymentRepository debtPaymentRepository)
+		{
+			_mapper = mapper;
+			_baseRepository = baseRepository;
+			_debtPaymentRepository = debtPaymentRepository;
+		}
 
 
-        public async Task<DebtPayment> NewDebtPaymentAsync(DebtPaymentRequest request, int debtId, string userId)
-        {
-            var debtPaymentDto = new DebtPaymentDto
-            {
-                UserId = userId,
-                CreatedAt = DateTime.UtcNow,
-                PaymentDate = request.PaymentDate,
-                Description = request.Description,
-                DebtPaymentValue = request.DebtPaymentValue,
-                CurrencyId = request.CurrencyId,
-                PeriodId = request.PeriodId,
-                DebtId = debtId
-            };
+		public async Task<DebtPayment> NewDebtPaymentAsync(DebtPaymentRequest request, int debtId, string userId)
+		{
+			var debtPaymentDto = new DebtPaymentDto
+			{
+				UserId = userId,
+				CreatedAt = DateTime.UtcNow,
+				PaymentDate = request.PaymentDate,
+				Description = request.Description,
+				DebtPaymentValue = request.DebtPaymentValue,
+				CurrencyId = request.CurrencyId,
+				PeriodId = request.PeriodId,
+				DebtId = debtId
+			};
 
-            var debtPayment = _mapper.Map<DebtPayment>(debtPaymentDto);
+			var debtPayment = _mapper.Map<DebtPayment>(debtPaymentDto);
 
-            return await _baseRepository.CreateEntityAsync(debtPayment);
-        }
+			return await _baseRepository.CreateEntityAsync(debtPayment);
+		}
 
-        public async Task<DebtPayment> GetDebtPaymentAsync(int debtPaymentId)
-        {
-            return await _baseRepository.GetEntityAsync(debtPaymentId);
-        }
+		public async Task<DebtPayment> GetDebtPaymentAsync(int debtPaymentId)
+		{
+			return await _baseRepository.GetEntityAsync(debtPaymentId);
+		}
 
-        public async Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId, string userId)
-        {
-            return await _debtPaymentRepository.GetDebtPaymentsAsync(debtId, userId);
-        }
+		public async Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId, string userId)
+		{
+			return await _debtPaymentRepository.GetDebtPaymentsAsync(debtId, userId);
+		}
 
-        public async Task<bool> UpdateDebtPaymentAsync(int debtPaymentId, UpdateDebtPaymentRequest request)
-        {
-            var currentDebtPayment = await _baseRepository.GetEntityAsync(debtPaymentId);
+		public async Task<bool> UpdateDebtPaymentAsync(int debtPaymentId, UpdateDebtPaymentRequest request)
+		{
+			var currentDebtPayment = await _baseRepository.GetEntityAsync(debtPaymentId);
 
-            currentDebtPayment.UpdatedAt = DateTime.UtcNow;
-            currentDebtPayment.Description = request.Description;
-            currentDebtPayment.DebtPaymentValue = request.DebtPaymentValue;
-            currentDebtPayment.CurrencyId = request.CurrencyId;
-            currentDebtPayment.PeriodId = request.PeriodId;
+			currentDebtPayment.UpdatedAt = DateTime.UtcNow;
+			currentDebtPayment.Description = request.Description;
+			currentDebtPayment.DebtPaymentValue = request.DebtPaymentValue;
+			currentDebtPayment.CurrencyId = request.CurrencyId;
+			currentDebtPayment.PeriodId = request.PeriodId;
 
-            return await _baseRepository.UpdateEntityAsync(currentDebtPayment);
-        }
+			return await _baseRepository.UpdateEntityAsync(currentDebtPayment);
+		}
 
-        public async Task<bool> DeleteDebtPaymentAsync(DebtPayment debtPayment)
-        {
-            return await _baseRepository.DeleteEntityAsync(debtPayment);
-        }
-    }
+		public async Task<bool> DeleteDebtPaymentAsync(DebtPayment debtPayment)
+		{
+			return await _baseRepository.DeleteEntityAsync(debtPayment);
+		}
+	}
 }

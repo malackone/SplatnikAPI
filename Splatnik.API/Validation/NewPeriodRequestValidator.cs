@@ -8,25 +8,25 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Validation
 {
-    public class NewPeriodRequestValidator : AbstractValidator<PeriodRequest>
-    {
-        public NewPeriodRequestValidator()
-        {
-            RuleFor(x => x.FirstDay)
-                .NotEmpty()
-                .NotNull();
+	public class NewPeriodRequestValidator : AbstractValidator<PeriodRequest>
+	{
+		public NewPeriodRequestValidator()
+		{
+			RuleFor(x => x.FirstDay)
+				.NotEmpty()
+				.NotNull();
 
-            RuleFor(x => x.LastDay)
-                .NotEmpty()
-                .NotNull();
+			RuleFor(x => x.LastDay)
+				.NotEmpty()
+				.NotNull();
 
-            RuleFor(x => x.DisplayName)
-                .NotNull()
-                .NotEmpty()
-                .MaximumLength(7);
+			RuleFor(x => x.DisplayName)
+				.NotNull()
+				.NotEmpty()
+				.MaximumLength(7);
 
-            RuleFor(x => x.Notes)
-                .MaximumLength(1000);
-        }
-    }
+			RuleFor(x => x.Notes)
+				.MaximumLength(1000);
+		}
+	}
 }

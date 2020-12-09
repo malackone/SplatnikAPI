@@ -14,10 +14,10 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Controllers.V1
 {
-    [Authorize(Policy = SecurityPolicies.User, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+	[Authorize(Policy = SecurityPolicies.User, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
-    public class DebtController : ControllerBase 
-    {
+	public class DebtController : ControllerBase 
+	{
 		private readonly IMapper _mapper;
 		private readonly IUriService _uriService;
 		private readonly IIdentityService _identityService;

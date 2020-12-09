@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Services
 {
-    public class IncomeService : IIncomeService
+	public class IncomeService : IIncomeService
 	{
 		private readonly IMapper _mapper;
 		private readonly IIncomeRepository _incomeRepository;

@@ -20,6 +20,7 @@ namespace Splatnik.API
 								.SetBasePath(env.ContentRootPath)
 								.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
 								.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+								.AddUserSecrets<Program>()
 								.AddEnvironmentVariables();
 
 			Configuration = builder.Build();
@@ -49,7 +50,6 @@ namespace Splatnik.API
 				app.UseDeveloperExceptionPage();
 			}
 
-
 			var swaggerOptions = new SwaggerSettings();
 			Configuration.GetSection(nameof(SwaggerSettings)).Bind(swaggerOptions);
 
@@ -58,22 +58,12 @@ namespace Splatnik.API
 			{
 				c.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description);
 			});
-
-
-
-
 			app.UseHttpsRedirection();
-
 			app.UseStaticFiles();
-
-
 			app.UseRouting();
-
 			app.UseCors(MyAllowSpecificOrigins);
-
 			app.UseAuthentication();
 			app.UseAuthorization();
-
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();

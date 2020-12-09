@@ -10,23 +10,23 @@ using System.Threading.Tasks;
 
 namespace Splatnik.Data.Repositories
 {
-    public class DebtPaymentRepository : IDebtPaymentRepository
-    {
-        private readonly DataContext _dataContext;
+	public class DebtPaymentRepository : IDebtPaymentRepository
+	{
+		private readonly DataContext _dataContext;
 
-        public DebtPaymentRepository(DataContext dataContext)
-        {
-            _dataContext = dataContext;
-        }
+		public DebtPaymentRepository(DataContext dataContext)
+		{
+			_dataContext = dataContext;
+		}
 
-        public async Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId, string userId)
-        {
-            return await _dataContext.DebtPayments.Where(x => x.DebtId == debtId && x.UserId == userId).ToListAsync();
-        }
+		public async Task<IList<DebtPayment>> GetDebtPaymentsAsync(int debtId, string userId)
+		{
+			return await _dataContext.DebtPayments.Where(x => x.DebtId == debtId && x.UserId == userId).ToListAsync();
+		}
 
-        public async Task<IList<DebtPayment>> GetUserDebtPayments(string userId)
-        {
-            return await _dataContext.DebtPayments.Where(x => x.UserId == userId).ToListAsync();
-        }
-    }
+		public async Task<IList<DebtPayment>> GetUserDebtPayments(string userId)
+		{
+			return await _dataContext.DebtPayments.Where(x => x.UserId == userId).ToListAsync();
+		}
+	}
 }

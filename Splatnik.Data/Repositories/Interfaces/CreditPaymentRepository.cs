@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Splatnik.Data.Repositories.Interfaces
 {
-    public class CreditPaymentRepository : ICreditPaymentRepository
-    {
-        private readonly DataContext dataContext;
+	public class CreditPaymentRepository : ICreditPaymentRepository
+	{
+		private readonly DataContext dataContext;
 
-        public CreditPaymentRepository(DataContext dataContext)
-        {
-            this.dataContext = dataContext;
-        }
+		public CreditPaymentRepository(DataContext dataContext)
+		{
+			this.dataContext = dataContext;
+		}
 
-        public async Task<IList<CreditPayment>> GetCreditPaymentsAsync(int creditId, string userId)
-        {
-            return await dataContext.CreditPayments.Where(x => x.CreditId == creditId && x.UserId == userId).ToListAsync();
-        }
-    }
+		public async Task<IList<CreditPayment>> GetCreditPaymentsAsync(int creditId, string userId)
+		{
+			return await dataContext.CreditPayments.Where(x => x.CreditId == creditId && x.UserId == userId).ToListAsync();
+		}
+	}
 }
