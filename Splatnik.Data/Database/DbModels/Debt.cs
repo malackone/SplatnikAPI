@@ -7,35 +7,35 @@ using System.Text;
 
 namespace Splatnik.Data.Database.DbModels
 {
-    public class Debt : BaseEntity
-    {
-        [Required]
-        [MaxLength(450)]
-        public string UserId { get; set; }
+	public class Debt : BaseEntity
+	{
+		[Required]
+		[MaxLength(450)]
+		public string UserId { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        public string Name { get; set; }
+		[Required]
+		[MaxLength(100)]
+		public string Name { get; set; }
 
-        [MaxLength(200)]
-        public string Description { get; set; }
+		[MaxLength(200)]
+		public string Description { get; set; }
 
-        [Required]
-        [Column(TypeName = "decimal(10, 2)")]
-        public decimal InitialValue { get; set; }
+		[Required]
+		[Column(TypeName = "decimal(10, 2)")]
+		public decimal InitialValue { get; set; }
 
-        [Required]
-        public int BudgetId { get; set; }
+		[Required]
+		public int BudgetId { get; set; }
 
-        [ForeignKey(nameof(BudgetId))]
-        public Budget Budget { get; set; }
+		[ForeignKey(nameof(BudgetId))]
+		public Budget Budget { get; set; }
 
-        [Required]
-        public int CurrencyId { get; set; }
+		[Required]
+		public int CurrencyId { get; set; }
 
-        [ForeignKey(nameof(CurrencyId))]
-        public Currency Currency { get; set; }
+		[ForeignKey(nameof(CurrencyId))]
+		public Currency Currency { get; set; }
 
-        public virtual List<DebtPayment> DebtPayments { get; set; }
-    }
+		public virtual List<DebtPayment> DebtPayments { get; set; }
+	}
 }

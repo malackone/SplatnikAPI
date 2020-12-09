@@ -37,7 +37,7 @@ namespace Splatnik.Data.Database.DbModels
 		public int CurrencyId { get; set; }
 
 		[ForeignKey(nameof(CurrencyId))]
-        public Currency Currency { get; set; }
+		public Currency Currency { get; set; }
 
-    }
+	}
 }

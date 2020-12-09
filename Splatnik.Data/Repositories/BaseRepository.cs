@@ -10,40 +10,40 @@ using System.Threading.Tasks;
 
 namespace Splatnik.Data.Repositories
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
-    {
-        private readonly DataContext dataContext;
-        private DbSet<T> entities;
+	public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+	{
+		private readonly DataContext dataContext;
+		private DbSet<T> entities;
 
-        public BaseRepository(DataContext dataContext)
-        {
-            this.dataContext = dataContext;
-            entities = this.dataContext.Set<T>();
+		public BaseRepository(DataContext dataContext)
+		{
+			this.dataContext = dataContext;
+			entities = this.dataContext.Set<T>();
 
-        }
+		}
 
-        public async Task<T> CreateEntityAsync(T entity)
-        {
-            entities.Add(entity);
-            await dataContext.SaveChangesAsync();
-            return entity;
-        }
+		public async Task<T> CreateEntityAsync(T entity)
+		{
+			entities.Add(entity);
+			await dataContext.SaveChangesAsync();
+			return entity;
+		}
 
-        public async Task<T> GetEntityAsync(int id)
-        {
-            return await entities.FirstOrDefaultAsync(x => x.Id == id);
-        }
+		public async Task<T> GetEntityAsync(int id)
+		{
+			return await entities.FirstOrDefaultAsync(x => x.Id == id);
+		}
 
-        public async Task<bool> DeleteEntityAsync(T entity)
-        {
-            entities.Remove(entity);
-            return (await dataContext.SaveChangesAsync()) > 0;
-        }
+		public async Task<bool> DeleteEntityAsync(T entity)
+		{
+			entities.Remove(entity);
+			return (await dataContext.SaveChangesAsync()) > 0;
+		}
 
-        public async Task<bool> UpdateEntityAsync(T entity)
-        {
-            entities.Update(entity);
-            return (await dataContext.SaveChangesAsync() > 0);
-        }
-    }
+		public async Task<bool> UpdateEntityAsync(T entity)
+		{
+			entities.Update(entity);
+			return (await dataContext.SaveChangesAsync() > 0);
+		}
+	}
 }

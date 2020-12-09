@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Services
 {
-    public class DebtService : IDebtService
-    {
+	public class DebtService : IDebtService
+	{
 		private readonly IMapper _mapper;
 		private readonly IBaseRepository<Debt> _baseRepository;
 		private readonly IDebtRepository _debtRepository;

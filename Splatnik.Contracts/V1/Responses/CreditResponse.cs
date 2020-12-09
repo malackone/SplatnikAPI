@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Splatnik.Contracts.V1.Responses
 {
-    public class CreditResponse
-    {
-    }
+	public class CreditResponse
+	{
+	}
 }

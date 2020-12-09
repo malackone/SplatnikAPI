@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Controllers.V1
 {
-    [Authorize(Policy = SecurityPolicies.User, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class IncomeController : ControllerBase
-    {
+	[Authorize(Policy = SecurityPolicies.User, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+	public class IncomeController : ControllerBase
+	{
 		private readonly IMapper _mapper;
 		private readonly IUriService _uriService;
 		private readonly IIdentityService _identityService;
@@ -25,15 +25,15 @@ namespace Splatnik.API.Controllers.V1
 		private readonly IPeriodService _periodService;
 		private readonly IIncomeService _incomeService;
 
-        public IncomeController(IMapper mapper, IUriService uriService, IIdentityService identityService, IBudgetService budgetService, IPeriodService periodService, IIncomeService incomeService)
-        {
+		public IncomeController(IMapper mapper, IUriService uriService, IIdentityService identityService, IBudgetService budgetService, IPeriodService periodService, IIncomeService incomeService)
+		{
 			_mapper = mapper;
 			_uriService = uriService;
 			_identityService = identityService;
 			_budgetService = budgetService;
 			_periodService = periodService;
 			_incomeService = incomeService;
-        }
+		}
 
 
 

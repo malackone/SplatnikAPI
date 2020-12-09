@@ -6,1072 +6,1072 @@ info:
   version: v1
 paths:
   /api/v1/admin/role:
-    post:
-      tags:
-        - Admin
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateRoleRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/CreateRoleRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/CreateRoleRequest'
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Admin
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/CreateRoleRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/CreateRoleRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/CreateRoleRequest'
+	  responses:
+		'200':
+		  description: Success
   /api/v1/admin/userRoles:
-    post:
-      tags:
-        - Admin
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AssignRoleToUserRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/AssignRoleToUserRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/AssignRoleToUserRequest'
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Admin
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/AssignRoleToUserRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/AssignRoleToUserRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/AssignRoleToUserRequest'
+	  responses:
+		'200':
+		  description: Success
   /api/v1/admin/testEmail:
-    get:
-      tags:
-        - Admin
-      responses:
-        '200':
-          description: Success
+	get:
+	  tags:
+		- Admin
+	  responses:
+		'200':
+		  description: Success
   /api/v1/user/budgets:
-    post:
-      tags:
-        - Budget
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BudgetRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/BudgetRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/BudgetRequest'
-      responses:
-        '200':
-          description: Success
-    get:
-      tags:
-        - Budget
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Budget
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/BudgetRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/BudgetRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/BudgetRequest'
+	  responses:
+		'200':
+		  description: Success
+	get:
+	  tags:
+		- Budget
+	  responses:
+		'200':
+		  description: Success
   '/api/v1/user/budgets/{budgetId}':
-    get:
-      tags:
-        - Budget
-      parameters:
-        - name: budgetId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	get:
+	  tags:
+		- Budget
+	  parameters:
+		- name: budgetId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   '/user/budgets/{budgetId}/periods':
-    post:
-      tags:
-        - Budget
-      parameters:
-        - name: budgetId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PeriodRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/PeriodRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/PeriodRequest'
-      responses:
-        '200':
-          description: Success
-    get:
-      tags:
-        - Budget
-      parameters:
-        - name: budgetId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Budget
+	  parameters:
+		- name: budgetId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/PeriodRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/PeriodRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/PeriodRequest'
+	  responses:
+		'200':
+		  description: Success
+	get:
+	  tags:
+		- Budget
+	  parameters:
+		- name: budgetId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   '/user/budgets/{budgetId}/periods/{periodId}':
-    get:
-      tags:
-        - Budget
-      parameters:
-        - name: budgetId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: periodId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	get:
+	  tags:
+		- Budget
+	  parameters:
+		- name: budgetId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+		- name: periodId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   /user/credits:
-    post:
-      tags:
-        - Credit
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreditRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/CreditRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/CreditRequest'
-      responses:
-        '200':
-          description: Success
-    get:
-      tags:
-        - Credit
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Credit
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/CreditRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/CreditRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/CreditRequest'
+	  responses:
+		'200':
+		  description: Success
+	get:
+	  tags:
+		- Credit
+	  responses:
+		'200':
+		  description: Success
   '/user/credits/{creditId}':
-    get:
-      tags:
-        - Credit
-      parameters:
-        - name: creditId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
-    patch:
-      tags:
-        - Credit
-      parameters:
-        - name: creditId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateCreditRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/UpdateCreditRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/UpdateCreditRequest'
-      responses:
-        '200':
-          description: Success
-    delete:
-      tags:
-        - Credit
-      parameters:
-        - name: creditId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	get:
+	  tags:
+		- Credit
+	  parameters:
+		- name: creditId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
+	patch:
+	  tags:
+		- Credit
+	  parameters:
+		- name: creditId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateCreditRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateCreditRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/UpdateCreditRequest'
+	  responses:
+		'200':
+		  description: Success
+	delete:
+	  tags:
+		- Credit
+	  parameters:
+		- name: creditId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   '/user/credits/{creditId}/creditpayments':
-    post:
-      tags:
-        - Credit
-      parameters:
-        - name: creditId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreditPaymentRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/CreditPaymentRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/CreditPaymentRequest'
-      responses:
-        '200':
-          description: Success
-    get:
-      tags:
-        - Credit
-      parameters:
-        - name: creditId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Credit
+	  parameters:
+		- name: creditId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/CreditPaymentRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/CreditPaymentRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/CreditPaymentRequest'
+	  responses:
+		'200':
+		  description: Success
+	get:
+	  tags:
+		- Credit
+	  parameters:
+		- name: creditId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   '/user/credits/{creditId}/creditpayments/{creditPaymentId}':
-    get:
-      tags:
-        - Credit
-      parameters:
-        - name: creditId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: creditPaymentId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
-    patch:
-      tags:
-        - Credit
-      parameters:
-        - name: creditId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: creditPaymentId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateCreditPaymentRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/UpdateCreditPaymentRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/UpdateCreditPaymentRequest'
-      responses:
-        '200':
-          description: Success
-    delete:
-      tags:
-        - Credit
-      parameters:
-        - name: creditId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: creditPaymentId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	get:
+	  tags:
+		- Credit
+	  parameters:
+		- name: creditId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+		- name: creditPaymentId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
+	patch:
+	  tags:
+		- Credit
+	  parameters:
+		- name: creditId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+		- name: creditPaymentId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateCreditPaymentRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateCreditPaymentRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/UpdateCreditPaymentRequest'
+	  responses:
+		'200':
+		  description: Success
+	delete:
+	  tags:
+		- Credit
+	  parameters:
+		- name: creditId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+		- name: creditPaymentId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   /user/debts:
-    post:
-      tags:
-        - Debt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DebtRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/DebtRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/DebtRequest'
-      responses:
-        '200':
-          description: Success
-    get:
-      tags:
-        - Debt
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Debt
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/DebtRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/DebtRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/DebtRequest'
+	  responses:
+		'200':
+		  description: Success
+	get:
+	  tags:
+		- Debt
+	  responses:
+		'200':
+		  description: Success
   '/user/debts/{debtId}':
-    get:
-      tags:
-        - Debt
-      parameters:
-        - name: debtId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
-    patch:
-      tags:
-        - Debt
-      parameters:
-        - name: debtId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateDebtRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/UpdateDebtRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/UpdateDebtRequest'
-      responses:
-        '200':
-          description: Success
-    delete:
-      tags:
-        - Debt
-      parameters:
-        - name: debtId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	get:
+	  tags:
+		- Debt
+	  parameters:
+		- name: debtId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
+	patch:
+	  tags:
+		- Debt
+	  parameters:
+		- name: debtId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateDebtRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateDebtRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/UpdateDebtRequest'
+	  responses:
+		'200':
+		  description: Success
+	delete:
+	  tags:
+		- Debt
+	  parameters:
+		- name: debtId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   '/user/debts/{debtId}/debtpayments':
-    post:
-      tags:
-        - Debt
-      parameters:
-        - name: debtId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DebtPaymentRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/DebtPaymentRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/DebtPaymentRequest'
-      responses:
-        '200':
-          description: Success
-    get:
-      tags:
-        - Debt
-      parameters:
-        - name: debtId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Debt
+	  parameters:
+		- name: debtId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/DebtPaymentRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/DebtPaymentRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/DebtPaymentRequest'
+	  responses:
+		'200':
+		  description: Success
+	get:
+	  tags:
+		- Debt
+	  parameters:
+		- name: debtId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   '/user/{debtId}/debtpayments/{debtPaymentId}':
-    get:
-      tags:
-        - Debt
-      parameters:
-        - name: debtId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: debtPaymentId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	get:
+	  tags:
+		- Debt
+	  parameters:
+		- name: debtId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+		- name: debtPaymentId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   '/user/debts/{debtId}/debtpayments/{debtPaymentId}':
-    patch:
-      tags:
-        - Debt
-      parameters:
-        - name: debtId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: debtPaymentId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateDebtPaymentRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/UpdateDebtPaymentRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/UpdateDebtPaymentRequest'
-      responses:
-        '200':
-          description: Success
-    delete:
-      tags:
-        - Debt
-      parameters:
-        - name: debtId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: debtPaymentId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	patch:
+	  tags:
+		- Debt
+	  parameters:
+		- name: debtId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+		- name: debtPaymentId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateDebtPaymentRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateDebtPaymentRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/UpdateDebtPaymentRequest'
+	  responses:
+		'200':
+		  description: Success
+	delete:
+	  tags:
+		- Debt
+	  parameters:
+		- name: debtId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+		- name: debtPaymentId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   /user/expenses:
-    post:
-      tags:
-        - Expense
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ExpenseRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/ExpenseRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/ExpenseRequest'
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Expense
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/ExpenseRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/ExpenseRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/ExpenseRequest'
+	  responses:
+		'200':
+		  description: Success
   '/user/expenses/{expenseId}':
-    get:
-      tags:
-        - Expense
-      parameters:
-        - name: expenseId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
-    patch:
-      tags:
-        - Expense
-      parameters:
-        - name: expenseId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateExpenseRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/UpdateExpenseRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/UpdateExpenseRequest'
-      responses:
-        '200':
-          description: Success
-    delete:
-      tags:
-        - Expense
-      parameters:
-        - name: expenseId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	get:
+	  tags:
+		- Expense
+	  parameters:
+		- name: expenseId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
+	patch:
+	  tags:
+		- Expense
+	  parameters:
+		- name: expenseId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateExpenseRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateExpenseRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/UpdateExpenseRequest'
+	  responses:
+		'200':
+		  description: Success
+	delete:
+	  tags:
+		- Expense
+	  parameters:
+		- name: expenseId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
   /api/v1/identity/register:
-    post:
-      tags:
-        - Identity
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserRegistrationRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/UserRegistrationRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/UserRegistrationRequest'
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Identity
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/UserRegistrationRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/UserRegistrationRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/UserRegistrationRequest'
+	  responses:
+		'200':
+		  description: Success
   /api/v1/identity/login:
-    post:
-      tags:
-        - Identity
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserLoginRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/UserLoginRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/UserLoginRequest'
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Identity
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/UserLoginRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/UserLoginRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/UserLoginRequest'
+	  responses:
+		'200':
+		  description: Success
   /api/v1/identity/refresh:
-    post:
-      tags:
-        - Identity
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RefreshTokenRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/RefreshTokenRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/RefreshTokenRequest'
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Identity
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/RefreshTokenRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/RefreshTokenRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/RefreshTokenRequest'
+	  responses:
+		'200':
+		  description: Success
   /api/v1/identity/emailConfirmation:
-    post:
-      tags:
-        - Identity
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ConfirmEmailRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/ConfirmEmailRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/ConfirmEmailRequest'
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Identity
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/ConfirmEmailRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/ConfirmEmailRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/ConfirmEmailRequest'
+	  responses:
+		'200':
+		  description: Success
   /user/incomes:
-    post:
-      tags:
-        - Income
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/IncomeRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/IncomeRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/IncomeRequest'
-      responses:
-        '200':
-          description: Success
+	post:
+	  tags:
+		- Income
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/IncomeRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/IncomeRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/IncomeRequest'
+	  responses:
+		'200':
+		  description: Success
   '/user/incomes/{incomeId}':
-    get:
-      tags:
-        - Income
-      parameters:
-        - name: incomeId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
-    patch:
-      tags:
-        - Income
-      parameters:
-        - name: incomeId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateIncomeRequest'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/UpdateIncomeRequest'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/UpdateIncomeRequest'
-      responses:
-        '200':
-          description: Success
-    delete:
-      tags:
-        - Income
-      parameters:
-        - name: incomeId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
+	get:
+	  tags:
+		- Income
+	  parameters:
+		- name: incomeId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
+	patch:
+	  tags:
+		- Income
+	  parameters:
+		- name: incomeId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  requestBody:
+		content:
+		  application/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateIncomeRequest'
+		  text/json:
+			schema:
+			  $ref: '#/components/schemas/UpdateIncomeRequest'
+		  application/*+json:
+			schema:
+			  $ref: '#/components/schemas/UpdateIncomeRequest'
+	  responses:
+		'200':
+		  description: Success
+	delete:
+	  tags:
+		- Income
+	  parameters:
+		- name: incomeId
+		  in: path
+		  required: true
+		  schema:
+			type: integer
+			format: int32
+	  responses:
+		'200':
+		  description: Success
 components:
   schemas:
-    CreateRoleRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-      additionalProperties: false
-    AssignRoleToUserRequest:
-      type: object
-      properties:
-        username:
-          type: string
-          nullable: true
-        roleName:
-          type: string
-          nullable: true
-      additionalProperties: false
-    BudgetRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-      additionalProperties: false
-    PeriodRequest:
-      type: object
-      properties:
-        firstDay:
-          type: string
-          format: date-time
-        lastDay:
-          type: string
-          format: date-time
-        displayName:
-          type: string
-          nullable: true
-        notes:
-          type: string
-          nullable: true
-        budgetId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    CreditRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        bankName:
-          type: string
-          nullable: true
-        bankAccountNumber:
-          type: string
-          nullable: true
-        contractNumber:
-          type: string
-          nullable: true
-        initNoOfPayments:
-          type: integer
-          format: int32
-        initialCreditValue:
-          type: number
-          format: double
-        currencyId:
-          type: integer
-          format: int32
-        budgetId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    UpdateCreditRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        bankName:
-          type: string
-          nullable: true
-        bankAccountNumber:
-          type: string
-          nullable: true
-        contractNumber:
-          type: string
-          nullable: true
-        initNoOfPayments:
-          type: integer
-          format: int32
-        initialCreditValue:
-          type: number
-          format: double
-        currencyId:
-          type: integer
-          format: int32
-        budgetId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    CreditPaymentRequest:
-      type: object
-      properties:
-        userId:
-          type: string
-          nullable: true
-        paymentDate:
-          type: string
-          format: date-time
-        paymentValue:
-          type: number
-          format: double
-        periodId:
-          type: integer
-          format: int32
-        currencyId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    UpdateCreditPaymentRequest:
-      type: object
-      properties:
-        paymentDate:
-          type: string
-          format: date-time
-        paymentValue:
-          type: number
-          format: double
-      additionalProperties: false
-    DebtRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        initialValue:
-          type: number
-          format: double
-        currencyId:
-          type: integer
-          format: int32
-        budgetId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    UpdateDebtRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        initialValue:
-          type: number
-          format: double
-        budgetId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    DebtPaymentRequest:
-      type: object
-      properties:
-        paymentDate:
-          type: string
-          format: date-time
-        description:
-          type: string
-          nullable: true
-        debtPaymentValue:
-          type: number
-          format: double
-        currencyId:
-          type: integer
-          format: int32
-        periodId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    UpdateDebtPaymentRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          nullable: true
-        debtPaymentValue:
-          type: number
-          format: double
-        currencyId:
-          type: integer
-          format: int32
-        periodId:
-          type: integer
-          format: int32
-        budgetId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    ExpenseRequest:
-      type: object
-      properties:
-        expenseDate:
-          type: string
-          format: date-time
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        expenseValue:
-          type: number
-          format: double
-        currencyId:
-          type: integer
-          format: int32
-        periodId:
-          type: integer
-          format: int32
-        budgetId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    UpdateExpenseRequest:
-      type: object
-      properties:
-        expenseDate:
-          type: string
-          format: date-time
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        expenseValue:
-          type: number
-          format: double
-        currencyId:
-          type: integer
-          format: int32
-        periodId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    UserRegistrationRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          nullable: true
-        password:
-          type: string
-          nullable: true
-      additionalProperties: false
-    UserLoginRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          nullable: true
-        password:
-          type: string
-          nullable: true
-      additionalProperties: false
-    RefreshTokenRequest:
-      type: object
-      properties:
-        token:
-          type: string
-          nullable: true
-        refreshToken:
-          type: string
-          nullable: true
-      additionalProperties: false
-    ConfirmEmailRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          nullable: true
-        token:
-          type: string
-          nullable: true
-      additionalProperties: false
-    IncomeRequest:
-      type: object
-      properties:
-        incomeDate:
-          type: string
-          format: date-time
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        incomeValue:
-          type: number
-          format: double
-        currencyId:
-          type: integer
-          format: int32
-        budgetId:
-          type: integer
-          format: int32
-        periodId:
-          type: integer
-          format: int32
-      additionalProperties: false
-    UpdateIncomeRequest:
-      type: object
-      properties:
-        incomeDate:
-          type: string
-          format: date-time
-        name:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        incomeValue:
-          type: number
-          format: double
-        currencyId:
-          type: integer
-          format: int32
-        periodId:
-          type: integer
-          format: int32
-      additionalProperties: false
+	CreateRoleRequest:
+	  type: object
+	  properties:
+		name:
+		  type: string
+		  nullable: true
+	  additionalProperties: false
+	AssignRoleToUserRequest:
+	  type: object
+	  properties:
+		username:
+		  type: string
+		  nullable: true
+		roleName:
+		  type: string
+		  nullable: true
+	  additionalProperties: false
+	BudgetRequest:
+	  type: object
+	  properties:
+		name:
+		  type: string
+		  nullable: true
+		description:
+		  type: string
+		  nullable: true
+	  additionalProperties: false
+	PeriodRequest:
+	  type: object
+	  properties:
+		firstDay:
+		  type: string
+		  format: date-time
+		lastDay:
+		  type: string
+		  format: date-time
+		displayName:
+		  type: string
+		  nullable: true
+		notes:
+		  type: string
+		  nullable: true
+		budgetId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	CreditRequest:
+	  type: object
+	  properties:
+		name:
+		  type: string
+		  nullable: true
+		description:
+		  type: string
+		  nullable: true
+		bankName:
+		  type: string
+		  nullable: true
+		bankAccountNumber:
+		  type: string
+		  nullable: true
+		contractNumber:
+		  type: string
+		  nullable: true
+		initNoOfPayments:
+		  type: integer
+		  format: int32
+		initialCreditValue:
+		  type: number
+		  format: double
+		currencyId:
+		  type: integer
+		  format: int32
+		budgetId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	UpdateCreditRequest:
+	  type: object
+	  properties:
+		name:
+		  type: string
+		  nullable: true
+		description:
+		  type: string
+		  nullable: true
+		bankName:
+		  type: string
+		  nullable: true
+		bankAccountNumber:
+		  type: string
+		  nullable: true
+		contractNumber:
+		  type: string
+		  nullable: true
+		initNoOfPayments:
+		  type: integer
+		  format: int32
+		initialCreditValue:
+		  type: number
+		  format: double
+		currencyId:
+		  type: integer
+		  format: int32
+		budgetId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	CreditPaymentRequest:
+	  type: object
+	  properties:
+		userId:
+		  type: string
+		  nullable: true
+		paymentDate:
+		  type: string
+		  format: date-time
+		paymentValue:
+		  type: number
+		  format: double
+		periodId:
+		  type: integer
+		  format: int32
+		currencyId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	UpdateCreditPaymentRequest:
+	  type: object
+	  properties:
+		paymentDate:
+		  type: string
+		  format: date-time
+		paymentValue:
+		  type: number
+		  format: double
+	  additionalProperties: false
+	DebtRequest:
+	  type: object
+	  properties:
+		name:
+		  type: string
+		  nullable: true
+		description:
+		  type: string
+		  nullable: true
+		initialValue:
+		  type: number
+		  format: double
+		currencyId:
+		  type: integer
+		  format: int32
+		budgetId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	UpdateDebtRequest:
+	  type: object
+	  properties:
+		name:
+		  type: string
+		  nullable: true
+		description:
+		  type: string
+		  nullable: true
+		initialValue:
+		  type: number
+		  format: double
+		budgetId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	DebtPaymentRequest:
+	  type: object
+	  properties:
+		paymentDate:
+		  type: string
+		  format: date-time
+		description:
+		  type: string
+		  nullable: true
+		debtPaymentValue:
+		  type: number
+		  format: double
+		currencyId:
+		  type: integer
+		  format: int32
+		periodId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	UpdateDebtPaymentRequest:
+	  type: object
+	  properties:
+		description:
+		  type: string
+		  nullable: true
+		debtPaymentValue:
+		  type: number
+		  format: double
+		currencyId:
+		  type: integer
+		  format: int32
+		periodId:
+		  type: integer
+		  format: int32
+		budgetId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	ExpenseRequest:
+	  type: object
+	  properties:
+		expenseDate:
+		  type: string
+		  format: date-time
+		name:
+		  type: string
+		  nullable: true
+		description:
+		  type: string
+		  nullable: true
+		expenseValue:
+		  type: number
+		  format: double
+		currencyId:
+		  type: integer
+		  format: int32
+		periodId:
+		  type: integer
+		  format: int32
+		budgetId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	UpdateExpenseRequest:
+	  type: object
+	  properties:
+		expenseDate:
+		  type: string
+		  format: date-time
+		name:
+		  type: string
+		  nullable: true
+		description:
+		  type: string
+		  nullable: true
+		expenseValue:
+		  type: number
+		  format: double
+		currencyId:
+		  type: integer
+		  format: int32
+		periodId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	UserRegistrationRequest:
+	  type: object
+	  properties:
+		email:
+		  type: string
+		  format: email
+		  nullable: true
+		password:
+		  type: string
+		  nullable: true
+	  additionalProperties: false
+	UserLoginRequest:
+	  type: object
+	  properties:
+		email:
+		  type: string
+		  format: email
+		  nullable: true
+		password:
+		  type: string
+		  nullable: true
+	  additionalProperties: false
+	RefreshTokenRequest:
+	  type: object
+	  properties:
+		token:
+		  type: string
+		  nullable: true
+		refreshToken:
+		  type: string
+		  nullable: true
+	  additionalProperties: false
+	ConfirmEmailRequest:
+	  type: object
+	  properties:
+		email:
+		  type: string
+		  nullable: true
+		token:
+		  type: string
+		  nullable: true
+	  additionalProperties: false
+	IncomeRequest:
+	  type: object
+	  properties:
+		incomeDate:
+		  type: string
+		  format: date-time
+		name:
+		  type: string
+		  nullable: true
+		description:
+		  type: string
+		  nullable: true
+		incomeValue:
+		  type: number
+		  format: double
+		currencyId:
+		  type: integer
+		  format: int32
+		budgetId:
+		  type: integer
+		  format: int32
+		periodId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
+	UpdateIncomeRequest:
+	  type: object
+	  properties:
+		incomeDate:
+		  type: string
+		  format: date-time
+		name:
+		  type: string
+		  nullable: true
+		description:
+		  type: string
+		  nullable: true
+		incomeValue:
+		  type: number
+		  format: double
+		currencyId:
+		  type: integer
+		  format: int32
+		periodId:
+		  type: integer
+		  format: int32
+	  additionalProperties: false
   securitySchemes:
-    Bearer:
-      type: apiKey
-      description: JWT Authorization header using bearer scheme
-      name: Authorization
-      in: header
+	Bearer:
+	  type: apiKey
+	  description: JWT Authorization header using bearer scheme
+	  name: Authorization
+	  in: header
 security:
   - Bearer: []

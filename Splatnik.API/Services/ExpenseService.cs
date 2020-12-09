@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Services
 {
-    public class ExpenseService : IExpenseService
-    {
+	public class ExpenseService : IExpenseService
+	{
 		private readonly IMapper _mapper;
 		private readonly IBaseRepository<Expense> _baseRepository;
 		private readonly IExpenseRepository _expenseRepository;

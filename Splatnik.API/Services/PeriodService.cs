@@ -11,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Services
 {
-    public class PeriodService : IPeriodService
+	public class PeriodService : IPeriodService
 	{
 		private readonly IMapper _mapper;
 		private readonly IBaseRepository<Period> _baseRepository;
 		private readonly IPeriodRepository _periodRepository;
 
 		public PeriodService(IMapper mapper, IBaseRepository<Period> baseRepository, IPeriodRepository periodRepository)
-        {
+		{
 			_mapper = mapper;
 			_baseRepository = baseRepository;
 			_periodRepository = periodRepository;
-        }
+		}
 
 
 		public async Task<Period> NewPeriodAsync(PeriodRequest periodRequest, string userId)

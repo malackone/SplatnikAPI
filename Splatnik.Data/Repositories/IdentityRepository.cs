@@ -104,8 +104,8 @@ namespace Splatnik.Data.Repositories
 		}
 		
 		public async Task<IdentityUser> FindUserByIdAsync(string userId)
-        {
+		{
 			return await _userManager.FindByIdAsync(userId);
-        }
+		}
 	}
 }

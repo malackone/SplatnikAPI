@@ -10,23 +10,23 @@ using System.Threading.Tasks;
 
 namespace Splatnik.Data.Repositories
 {
-    public class CreditRepository : ICreditRepository
-    {
-        private readonly DataContext dataContext;
+	public class CreditRepository : ICreditRepository
+	{
+		private readonly DataContext dataContext;
 
-        public CreditRepository(DataContext dataContext)
-        {
-            this.dataContext = dataContext;
-        }
+		public CreditRepository(DataContext dataContext)
+		{
+			this.dataContext = dataContext;
+		}
 
-        public async Task<IList<Credit>> GetUserBudgetCreditsAsync(int budgetId, string userId)
-        {
-            return await dataContext.Credits.Where(x => x.BudgetId == budgetId && x.UserId == userId).ToListAsync();
-        }
+		public async Task<IList<Credit>> GetUserBudgetCreditsAsync(int budgetId, string userId)
+		{
+			return await dataContext.Credits.Where(x => x.BudgetId == budgetId && x.UserId == userId).ToListAsync();
+		}
 
-        public async Task<IList<Credit>> GetUserCreditsAsync(string userId)
-        {
-            return await dataContext.Credits.Where(x => x.UserId == userId).ToListAsync();
-        }
-    }
+		public async Task<IList<Credit>> GetUserCreditsAsync(string userId)
+		{
+			return await dataContext.Credits.Where(x => x.UserId == userId).ToListAsync();
+		}
+	}
 }

@@ -24,53 +24,53 @@ namespace Splatnik.API.Services
 		}
 
 		public Uri GetPeriodUri(int budgetId, int periodId)
-        {
+		{
 			return new Uri(_baseUri + ApiRoutes.UserBudget.BudgetPeriod
 				.Replace("{budgetId}", budgetId.ToString())
 				.Replace("{periodId}", periodId.ToString()));
-        }
+		}
 
 		public Uri GetConfirmationLink(string email, string token)
 		{
 			return new Uri(_baseUri + ApiRoutes.Identity.ConfirmEmail + "/" + email + "/" + token);
 		}
 
-        public Uri GetExpenseUri(int expenseId)
-        {
+		public Uri GetExpenseUri(int expenseId)
+		{
 			return new Uri(_baseUri + ApiRoutes.UserExpenses.BudgetPeriodExpense
 				.Replace("{expenseId}", expenseId.ToString()));
 		}
 
-        public Uri GetIncomeUri(int incomeId)
-        {
+		public Uri GetIncomeUri(int incomeId)
+		{
 			return new Uri(_baseUri + ApiRoutes.UserExpenses.BudgetPeriodExpense
 				.Replace("{incomeId}", incomeId.ToString()));
 		}
 
-        public Uri GetDebtUri(int debtId)
-        {
-            return new Uri(_baseUri + ApiRoutes.UserDebts.BudgetDebt
+		public Uri GetDebtUri(int debtId)
+		{
+			return new Uri(_baseUri + ApiRoutes.UserDebts.BudgetDebt
 				.Replace("{debtId}", debtId.ToString()));
 		}
 
-        public Uri GetDebtPaymentUri(int debtId, int debtPaymentId)
-        {
+		public Uri GetDebtPaymentUri(int debtId, int debtPaymentId)
+		{
 			return new Uri(_baseUri + ApiRoutes.UserDebts.BudgetDebtPayments
 				.Replace("{debtId}", debtId.ToString())
 				.Replace("{debtPaymentId}", debtPaymentId.ToString()));
 		}
 
-        public Uri GetCreditUri(int creditId)
-        {
+		public Uri GetCreditUri(int creditId)
+		{
 			return new Uri(_baseUri + ApiRoutes.UserCredits.BudgetCredit
 				.Replace("{creditId}", creditId.ToString()));
 		}
 
-        public Uri GetCreditPaymentUri(int creditId, int creditPaymentId)
-        {
+		public Uri GetCreditPaymentUri(int creditId, int creditPaymentId)
+		{
 			return new Uri(_baseUri + ApiRoutes.UserCredits.BudgetCreditPayments
 				.Replace("{creditId}", creditId.ToString())
 				.Replace("{creditPaymentId}", creditPaymentId.ToString()));
 		}
-    }
+	}
 }

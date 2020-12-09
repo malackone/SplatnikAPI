@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 
 namespace Splatnik.API.Controllers.V1
 {
-    [Authorize(Policy = SecurityPolicies.User, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class ExpenseController : ControllerBase
-    {
+	[Authorize(Policy = SecurityPolicies.User, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+	public class ExpenseController : ControllerBase
+	{
 		private readonly IMapper _mapper;
 		private readonly IUriService _uriService;
 		private readonly IIdentityService _identityService;
@@ -37,7 +37,7 @@ namespace Splatnik.API.Controllers.V1
 		}
 
 
-        [HttpPost(ApiRoutes.UserExpenses.CreateExpense)]
+		[HttpPost(ApiRoutes.UserExpenses.CreateExpense)]
 		public async Task<IActionResult> CreateExpense([FromBody] ExpenseRequest request)
 		{
 			var userId = User.Claims.FirstOrDefault(c => c.Type == "id").Value;

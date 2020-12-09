@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Splatnik.Data.Repositories.Interfaces
 {
-    public interface IDebtRepository
-    {
-        Task<IList<Debt>> GetDebtsByUserIdAsync(string userId);
-    }
+	public interface IDebtRepository
+	{
+		Task<IList<Debt>> GetDebtsByUserIdAsync(string userId);
+	}
 }
